@@ -1,0 +1,20 @@
+AllCops:
+  TargetRubyVersion: 2.6.6
+  Exclude:
+    - bin/*
+    - config/**/*
+    - db/**/*
+    - lib/**/*
+    - tmp/**/*
+    - vendor/**/*
+    - config.ru
+    - Rakefile
+
+Style/BlockComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
