@@ -14,7 +14,7 @@ module Scraper
         break if guild_cards.count.zero?
 
         guild_cards.each do |guild|
-          guild_name = guild['href'].split('+').last.strip
+          guild_name = CGI.escape guild['href'].split('+').last.strip
 
           ::Guild.find_or_create_by_insensitive_name!(guild_name)
         end

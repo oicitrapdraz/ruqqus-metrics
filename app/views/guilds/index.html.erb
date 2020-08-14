@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Guilds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Subscribers</th>
+      <th>Mods</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @guilds.each do |guild| %>
+      <tr>
+        <td><%= guild.id %></td>
+        <td><%= guild.name %></td>
+        <td><%= guild.subscribers_count %></td>
+        <td><%= guild.mods_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
