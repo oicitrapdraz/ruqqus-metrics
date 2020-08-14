@@ -1,0 +1,1 @@
+RUQQUS_API_URL = 'https://ruqqus.com/api/v1'
