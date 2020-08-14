@@ -22,9 +22,15 @@ module API
 
       net_http = "Net::HTTP::#{method.capitalize}".constantize
 
-      response = net_http.new(uri.path)
+      final_uri = if uri.query
+                    "#{uri.path}?#{uri.query}"
+                  else
+                    uri.path
+                  end
 
-      JSON.parse http.request(response).body
+      response = net_http.new(final_uri)
+
+      http.request(response).body
     rescue StandardError => e
       Logg.error(e)
     end

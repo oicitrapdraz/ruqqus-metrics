@@ -16,7 +16,7 @@ module API
       private
 
       def request_ruqqus
-        API::Request.new("#{RUQQUS_API_URL}/guild/#{guild.name}", 'get').call
+        JSON.parse API::Request.new("#{RUQQUS_API_URL}/guild/#{guild.name}", 'get').call
       end
 
       def update_guild_data(response)

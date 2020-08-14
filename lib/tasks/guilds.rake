@@ -1,5 +1,5 @@
 namespace :guilds do
-  desc "Updates the statistics of some guilds"
+  desc "Updates the statistics of some Guilds"
   task update: :environment do
     guilds_ids = Guild.select('id, subscribers_count + EXTRACT(EPOCH FROM(current_timestamp - created_at)) / 60 as points')
                   .order(points: :desc)
@@ -9,7 +9,8 @@ namespace :guilds do
     guilds_ids.each { |guild_id| API::Importer::Guild.new(Guild.find(guild_id)).call }
   end
 
-  desc "TODO"
+  desc "Scrape Guilds in Ruqqus"
   task scrape: :environment do
+    Scraper::Guild.new.call
   end
 end
