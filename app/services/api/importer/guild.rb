@@ -24,8 +24,13 @@ module API
         mods_count = response['mods_count']
         subscribers_count = response['subscriber_count']
 
-        guild.update!(name: name, mods_count: mods_count, subscribers_count: subscribers_count, data: response)
-        guild.guild_histories.create!(mods_count: mods_count, subscribers_count: subscribers_count, data: response)
+        ActiveRecord::Base.transaction do
+          guild.update!(name: name, mods_count: mods_count, subscribers_count: subscribers_count, data: response)
+
+          ids = ::Guild.order(subscribers_count: :desc, created_at: :desc).ids
+
+          guild.guild_histories.create!(rank: ids.index(guild.id) + 1, mods_count: mods_count, subscribers_count: subscribers_count, data: response)
+        end
       rescue StandardError => e
         Logg.error(e)
       end

@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2020_08_14_011611) do
   create_table "guild_histories", force: :cascade do |t|
     t.bigint "guild_id", null: false
     t.jsonb "data"
+    t.integer "rank"
     t.integer "subscribers_count"
     t.integer "mods_count"
     t.datetime "created_at", precision: 6, null: false

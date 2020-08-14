@@ -3,6 +3,7 @@ class CreateGuildHistories < ActiveRecord::Migration[6.0]
     create_table :guild_histories do |t|
       t.references :guild, null: false, foreign_key: true
       t.jsonb :data
+      t.integer :rank
       t.integer :subscribers_count
       t.integer :mods_count
 
