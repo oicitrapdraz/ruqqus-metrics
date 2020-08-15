@@ -21,7 +21,7 @@
           <% @guilds.each do |guild| %>
           <tr>
             <th scope='row'><%= "##{guild.rank}" %></td>
-            <td><%= link_to "+#{guild.name}", "#{RUQQUS_GUILDS_BASE_URL}#{guild.name}", target: :_blank %></td>
+            <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
             <td><%= guild.subscribers_count %></td>
             <td><%= guild.mods_count %></td>
             <% if guild.data['is_banned'] %>

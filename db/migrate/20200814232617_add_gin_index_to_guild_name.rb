@@ -4,6 +4,6 @@ class AddGinIndexToGuildName < ActiveRecord::Migration[6.0]
   end
 
   def down
-    execute 'ROP INDEX IF EXISTS index_guilds_on_name'
+    execute 'DROP INDEX IF EXISTS index_guilds_on_name'
   end
 end

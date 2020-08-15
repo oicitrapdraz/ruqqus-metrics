@@ -1,3 +1,54 @@
-
-
-<%= link_to 'Back', guilds_path %>
+<div class='row'>
+  <div class='col-xl-12'>
+    <h2 class='title text-center'>+<%= @guild.name %> History</h2>
+    <div class='table-responsive'>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th scope='col' style='width: 15%;'>Ranking</th>
+            <th scope='col' style='width: 15%;'>Subscribers</th>
+            <th scope='col' style='width: 10%;'>Mods</th>
+            <th scope='col' style='width: 10%;'>Banned</th>
+            <th scope='col' style='width: 10%;'>Over 18</th>
+            <th scope='col' style='width: 10%;'>Private</th>
+            <th scope='col' style='width: 10%;'>Restricted</th>
+            <th scope='col' style='width: 20%;'></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @guild.guild_histories.each do |guild_history| %>
+          <tr>
+            <th scope='row'><%= "##{guild_history.rank}" %></td>
+            <td><%= guild_history.subscribers_count %></td>
+            <td><%= guild_history.mods_count %></td>
+            <% if guild_history.data['is_banned'] %>
+            <td><span class='badge badge-success'>T</span></td>
+            <% else %>
+            <td><span class='badge badge-danger'>F</span></td>
+            <% end %>
+            <% if guild_history.data['over_18'] %>
+            <td><span class='badge badge-success'>T</span></td>
+            <% else %>
+            <td><span class='badge badge-danger'>F</span></td>
+            <% end %>
+            <% if guild_history.data['is_private'] %>
+            <td><span class='badge badge-success'>T</span></td>
+            <% else %>
+            <td><span class='badge badge-danger'>F</span></td>
+            <% end %>
+            <% if guild_history.data['is_restricted'] %>
+            <td><span class='badge badge-success'>T</span></td>
+            <% else %>
+            <td><span class='badge badge-danger'>F</span></td>
+            <% end %>
+            <td><%= distance_of_time_in_words(DateTime.now, guild_history.created_at) %> ago</td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <%== pagy_bootstrap_combo_nav_js(@pagy) %>
+    <br />
+  </div>
+</div>

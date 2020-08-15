@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_15_032606) do
+ActiveRecord::Schema.define(version: 2020_08_15_042539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 2020_08_15_032606) do
     t.integer "subscribers_count"
     t.integer "mods_count"
     t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.index "((data -> 'is_banned'::text))", name: "index_guild_histories_on_is_banned"
     t.index "((data -> 'is_private'::text))", name: "index_guild_histories_on_is_private"
     t.index "((data -> 'is_restricted'::text))", name: "index_guild_histories_on_is_restricted"
@@ -32,7 +31,6 @@ ActiveRecord::Schema.define(version: 2020_08_15_032606) do
     t.index ["guild_id"], name: "index_guild_histories_on_guild_id"
     t.index ["mods_count"], name: "index_guild_histories_on_mods_count"
     t.index ["subscribers_count"], name: "index_guild_histories_on_subscribers_count"
-    t.index ["updated_at"], name: "index_guild_histories_on_updated_at"
   end
 
   create_table "guilds", force: :cascade do |t|

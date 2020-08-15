@@ -5,14 +5,13 @@ class GuildsController < ApplicationController
 
   # GET /guilds
   def index
-    @pagy, @guilds = pagy(
-      Guild.search(search_params).order(subscribers_count: :desc, created_at: :desc), items: 10
-    )
+    @pagy, @guilds = pagy(Guild.search(search_params).order(subscribers_count: :desc, created_at: :desc), items: 10)
   end
 
   # GET /guilds/1
   def show
-    @guild = Guild.find(params[:id])
+    @guild = Guild.find_by!('LOWER(name) = LOWER(?)', params[:id])
+    @pagy, @guild_histories = pagy(@guild.guild_histories.order(created_at: :asc), items: 10)
   end
 
   private
