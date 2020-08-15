@@ -18,10 +18,23 @@
         <tbody>
           <% @guilds.each do |guild| %>
           <tr>
+            <% if guild.rank %>
             <th scope='row'><%= "##{guild.rank}" %></td>
+            <% else %>
+            <td>-</td>
+            <% end %>
             <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
+            <% if guild.subscribers_count %>
             <td><%= guild.subscribers_count %></td>
+            <% else %>
+            <td>-</td>
+            <% end %>
+            <% if guild.mods_count %>
             <td><%= guild.mods_count %></td>
+            <% else %>
+            <td>-</td>
+            <% end %>
+            <% if guild.data %>
             <% if guild.data['is_banned'] %>
             <td><span class='badge badge-success'>T</span></td>
             <% else %>
@@ -41,6 +54,12 @@
             <td><span class='badge badge-success'>T</span></td>
             <% else %>
             <td><span class='badge badge-danger'>F</span></td>
+            <% end %>
+            <% else %>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
             <% end %>
           </tr>
           <% end %>
