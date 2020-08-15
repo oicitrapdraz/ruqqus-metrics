@@ -5,6 +5,7 @@ AllCops:
     - config/**/*
     - db/**/*
     - lib/**/*
+    - node_modules/**/*
     - tmp/**/*
     - vendor/**/*
     - config.ru
@@ -19,5 +20,5 @@ Style/Documentation:
 Style/ClassAndModuleChildren:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120

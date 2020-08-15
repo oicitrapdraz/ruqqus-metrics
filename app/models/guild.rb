@@ -6,7 +6,20 @@ class Guild < ApplicationRecord
   validates_presence_of :name
   validates_uniqueness_of :name, case_sensitive: false
 
-  scope :find_or_create_by_insensitive_name!, lambda { |name|
+  scope :search, lambda { |params|
+    params.reject! { |_, v| v.blank? }
+
+    scope = all
+    scope = scope.where('name ILIKE ?', "%#{params[:name]}%") if params[:name]
+    scope = scope.where("data->>'is_banned' = ?", params[:is_banned]) if params[:is_banned]
+    scope = scope.where("data->>'over_18' = ?", params[:over_18]) if params[:over_18]
+    scope = scope.where("data->>'is_private' = ?", params[:is_private]) if params[:is_private]
+    scope = scope.where("data->>'is_restricted' = ?", params[:is_restricted]) if params[:is_restricted]
+
+    scope
+  }
+
+  scope :find_or_create_by_case_insensitive_name!, lambda { |name|
     find_by('LOWER(name) = LOWER(?)', name) || create!(name: name)
   }
 end

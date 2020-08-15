@@ -1,11 +1,23 @@
+# frozen_string_literal: true
+
 class GuildsController < ApplicationController
-  before_action :set_guild, only: %i[show edit update destroy]
+  include Pagy::Backend
 
   # GET /guilds
   def index
-    @guilds = Guild.order(subscribers_count: :desc, created_at: :desc)
+    @pagy, @guilds = pagy(
+      Guild.search(search_params).order(subscribers_count: :desc, created_at: :desc), items: 10
+    )
   end
 
   # GET /guilds/1
-  def show; end
+  def show
+    @guild = Guild.find(params[:id])
+  end
+
+  private
+
+  def search_params
+    params.permit(:name, :is_banned, :over_18, :is_private, :is_restricted)
+  end
 end
