@@ -11,7 +11,7 @@ class GuildsController < ApplicationController
   # GET /guilds/1
   def show
     @guild = Guild.find_by!('LOWER(name) = LOWER(?)', params[:id])
-    @pagy, @guild_histories = pagy(@guild.guild_histories.order(created_at: :asc).offset(1), items: 10)
+    @pagy, @guild_histories = pagy(@guild.guild_histories.order(created_at: :desc).offset(1), items: 10)
   end
 
   private

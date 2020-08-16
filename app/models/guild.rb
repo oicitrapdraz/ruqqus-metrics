@@ -18,8 +18,4 @@ class Guild < ApplicationRecord
 
     scope
   }
-
-  scope :find_or_create_by_case_insensitive_name!, lambda { |name|
-    find_by('LOWER(name) = LOWER(?)', name) || create!(name: name)
-  }
 end

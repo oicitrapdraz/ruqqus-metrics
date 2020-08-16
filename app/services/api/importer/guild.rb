@@ -31,7 +31,7 @@ module API
 
           rank = ids.index(guild.id) + 1
 
-          guild.update!(rank: rank)
+          guild.update!(rank: rank, updated_at: DateTime.now)
           guild.guild_histories.create!(rank: rank, mods_count: mods_count, subscribers_count: subscribers_count, data: response)
         end
       rescue StandardError => e

@@ -16,7 +16,11 @@ module Scraper
         guild_cards.each do |guild|
           guild_name = CGI.escape guild['href'].split('+').last.strip
 
-          ::Guild.find_or_create_by_case_insensitive_name!(guild_name)
+          guild = ::Guild.find_by('LOWER(name) = LOWER(?)', guild_name)
+
+          return Logg.info('Stopping scrapper since the last guild was found') if guild
+
+          ::Guild.create!(name: guild_name)
         end
 
         page += 1

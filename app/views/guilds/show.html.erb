@@ -1,6 +1,6 @@
 <div class='row'>
   <div class='col-xl-12'>
-    <h2 class='title text-center'>+<%= @guild.name %> History</h2>
+    <h2 class='title text-center'><%= link_to "+#{@guild.name}", "#{RUQQUS_GUILDS_BASE_URL}#{@guild.name}", target: '_blank' %> Metrics</h2>
     <div class='table-responsive'>
       <table class='table'>
         <thead>
@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @guild.guild_histories.each do |guild_history| %>
+          <% @guild_histories.each do |guild_history| %>
           <tr>
             <th scope='row'><%= "##{guild_history.rank}" %></td>
             <td><%= guild_history.subscribers_count %></td>
