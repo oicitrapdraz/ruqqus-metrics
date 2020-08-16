@@ -5,7 +5,7 @@ class GuildsController < ApplicationController
 
   # GET /guilds
   def index
-    @pagy, @guilds = pagy(Guild.search(search_params).order(subscribers_count: :desc, created_at: :desc), items: 10)
+    @pagy, @guilds = pagy(Guild.search(search_params).order(subscribers_count: :desc, created_at: :desc).where('data IS NOT NULL'), items: 10)
   end
 
   # GET /guilds/1

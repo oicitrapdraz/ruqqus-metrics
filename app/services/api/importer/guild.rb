@@ -25,7 +25,7 @@ module API
         subscribers_count = response['subscriber_count']
 
         ActiveRecord::Base.transaction do
-          ids = ::Guild.order(subscribers_count: :desc, created_at: :desc).ids
+          ids = ::Guild.order(subscribers_count: :desc, created_at: :desc).where('data IS NOT NULL').ids
 
           rank = ids.index(guild.id) + 1
 
