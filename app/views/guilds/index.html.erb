@@ -1,98 +1,116 @@
 <div class='row'>
-  <div class='col-xl-9'>
-    <h2 class='title text-center'>Guild Ranking</h2>    
+  <div class='col-xl-2 d-none d-lg-block'>
+    <h4 class='sidebar-title'>Statistics</h4>
+    <br />
+    <ul>
+      <li>Created Guilds during the last day: <span class='badge badge-primary'><%= @statistics[:created_guilds_last_day] %></span></li>
+      <li>Created Guilds during the last day: <span class='badge badge-primary'><%= @statistics[:created_guilds_last_week] %></span></li>
+      <li>Created Guilds during the last day: <span class='badge badge-primary'><%= @statistics[:created_guilds_last_month] %></span></li>
+    </ul>
+    <br />
+  </div>
+  <div class='col-xl-8'>
     <div class='table-responsive'>
-      <table class='table'>
-        <thead>
-          <tr>
-            <th scope='col' style='width: 10%;'>Ranking</th>
-            <th scope='col' style='width: 35%;'>Name</th>
-            <th scope='col' style='width: 15%;'>Subscribers</th>
-            <th scope='col' style='width: 8%;'>Mods</th>
-            <th scope='col' style='width: 8%;'>Banned</th>
-            <th scope='col' style='width: 8%;'>Over 18</th>
-            <th scope='col' style='width: 8%;'>Private</th>
-            <th scope='col' style='width: 8%;'>Restricted</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @guilds.each do |guild| %>
-          <tr>
-            <% if guild.rank %>
-            <th scope='row'><%= "##{guild.rank}" %></td>
-            <% else %>
-            <td>-</td>
-            <% end %>
-            <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
-            <% if guild.subscribers_count %>
-            <td><%= guild.subscribers_count %></td>
-            <% else %>
-            <td>-</td>
-            <% end %>
-            <% if guild.mods_count %>
-            <td><%= guild.mods_count %></td>
-            <% else %>
-            <td>-</td>
-            <% end %>
-            <% if guild.data %>
-            <% if guild.data['is_banned'] %>
-            <td><span class='badge badge-success'>T</span></td>
-            <% else %>
-            <td><span class='badge badge-danger'>F</span></td>
-            <% end %>
-            <% if guild.data['over_18'] %>
-            <td><span class='badge badge-success'>T</span></td>
-            <% else %>
-            <td><span class='badge badge-danger'>F</span></td>
-            <% end %>
-            <% if guild.data['is_private'] %>
-            <td><span class='badge badge-success'>T</span></td>
-            <% else %>
-            <td><span class='badge badge-danger'>F</span></td>
-            <% end %>
-            <% if guild.data['is_restricted'] %>
-            <td><span class='badge badge-success'>T</span></td>
-            <% else %>
-            <td><span class='badge badge-danger'>F</span></td>
-            <% end %>
-            <% else %>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <% end %>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <div class="card">
+        <div class="card-header">
+          <h2 class='title text-center' style='margin-top: 20px;'>Guild Ranking</h2>
+        </div>
+        <div class="card-body">
+          <table class='table'>
+            <thead>
+              <tr>
+                <th scope='col' style='width: 10%;'>Ranking</th>
+                <th scope='col' style='width: 35%;'>Name</th>
+                <th scope='col' style='width: 15%;'>Subscribers</th>
+                <th scope='col' style='width: 8%;'>Mods</th>
+                <th scope='col' style='width: 8%;'>Banned</th>
+                <th scope='col' style='width: 8%;'>Over 18</th>
+                <th scope='col' style='width: 8%;'>Private</th>
+                <th scope='col' style='width: 8%;'>Restricted</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @guilds.each do |guild| %>
+              <tr>
+                <% if guild.rank %>
+                <th scope='row'><%= "##{guild.rank}" %></td>
+                <% else %>
+                <td>-</td>
+                <% end %>
+                <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
+                <% if guild.subscribers_count %>
+                <td><%= guild.subscribers_count %></td>
+                <% else %>
+                <td>-</td>
+                <% end %>
+                <% if guild.mods_count %>
+                <td><%= guild.mods_count %></td>
+                <% else %>
+                <td>-</td>
+                <% end %>
+                <% if guild.data %>
+                <% if guild.data['is_banned'] %>
+                <td><span class='badge badge-success'>T</span></td>
+                <% else %>
+                <td><span class='badge badge-danger'>F</span></td>
+                <% end %>
+                <% if guild.data['over_18'] %>
+                <td><span class='badge badge-success'>T</span></td>
+                <% else %>
+                <td><span class='badge badge-danger'>F</span></td>
+                <% end %>
+                <% if guild.data['is_private'] %>
+                <td><span class='badge badge-success'>T</span></td>
+                <% else %>
+                <td><span class='badge badge-danger'>F</span></td>
+                <% end %>
+                <% if guild.data['is_restricted'] %>
+                <td><span class='badge badge-success'>T</span></td>
+                <% else %>
+                <td><span class='badge badge-danger'>F</span></td>
+                <% end %>
+                <% else %>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <% end %>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <br />
     <%== pagy_bootstrap_combo_nav_js(@pagy) %>
     <br />
   </div>
-  <div class='col-xl-3'>
+  <div class='col-xl-2'>
     <h4 class='sidebar-title'>Search Filters</h4>
+    <br />
     <%= form_with url: guilds_path, method: :get, local: true do |form| %>
-      <div class='form-group'>
-        <%= form.text_field :name, value: params[:name], placeholder: 'Name', class: 'form-control' %>
-      </div>
-      <div class='form-group'>
-        <%= form.label :is_banned, 'Banned' %>
-        <%= form.select :is_banned, options_for_select([['Banned', true], ['Not Banned', false]], params[:is_banned]), { include_blank: 'All' }, class: 'form-control' %>
-      </div>
-      <div class='form-group'>
-        <%= form.label :over_18, 'Over 18' %>
-        <%= form.select :over_18, options_for_select([['Over 18', true], ['Not Over 18', false]], params[:over_18]), { include_blank: 'All' }, class: 'form-control' %>
-      </div>
-      <div class='form-group'>
-        <%= form.label :is_private, 'Private' %>
-        <%= form.select :is_private, options_for_select([['Private', true], ['Not Private', false]], params[:is_private]), { include_blank: 'All' }, class: 'form-control' %>
-      </div>
-      <div class='form-group'>
-        <%= form.label :is_restricted, 'Restricted' %>
-        <%= form.select :is_restricted, options_for_select([['Restricted', true], ['Not Restricted', false]], params[:is_restricted]), { include_blank: 'All' }, class: 'form-control' %>
-      </div>
-      <%= submit_tag 'Filter', class: 'btn btn-primary' %>
+    <div class='form-group'>
+      <%= form.text_field :name, value: params[:name], placeholder: 'Name', class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+      <%= form.label :is_banned, 'Banned' %>
+      <%= form.select :is_banned, options_for_select([['Banned', true], ['Not Banned', false]], params[:is_banned]), { include_blank: 'All' }, class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+      <%= form.label :over_18, 'Over 18' %>
+      <%= form.select :over_18, options_for_select([['Over 18', true], ['Not Over 18', false]], params[:over_18]), { include_blank: 'All' }, class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+      <%= form.label :is_private, 'Private' %>
+      <%= form.select :is_private, options_for_select([['Private', true], ['Not Private', false]], params[:is_private]), { include_blank: 'All' }, class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+      <%= form.label :is_restricted, 'Restricted' %>
+      <%= form.select :is_restricted, options_for_select([['Restricted', true], ['Not Restricted', false]], params[:is_restricted]), { include_blank: 'All' }, class: 'form-control' %>
+    </div>
+    <%= submit_tag 'Filter', class: 'btn btn-primary' %>
     <% end %>
+    <br />
   </div>
 </div>

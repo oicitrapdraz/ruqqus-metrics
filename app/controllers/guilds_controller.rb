@@ -10,6 +10,18 @@ class GuildsController < ApplicationController
     @pagy, @guilds = Rails.cache.fetch(cache_key, expires_in: 5.minutes) do
       pagy(Guild.search(search_params).where('data IS NOT NULL').order(subscribers_count: :desc, created_at: :desc), items: 10)
     end
+
+    @statistics = Rails.cache.fetch('index_statistics', expires_in: 5.minutes) do
+      created_guilds_last_day = Guild.where('created_at > ?', 1.day.ago).count
+      created_guilds_last_week = Guild.where('created_at > ?', 1.week.ago).count
+      created_guilds_last_month = Guild.where('created_at > ?', 1.month.ago).count
+
+      {
+        created_guilds_last_day: created_guilds_last_day,
+        created_guilds_last_week: created_guilds_last_week,
+        created_guilds_last_month: created_guilds_last_month
+      }
+    end
   end
 
   # GET /guilds/1
