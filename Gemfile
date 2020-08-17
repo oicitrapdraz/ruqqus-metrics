@@ -5,6 +5,9 @@ ruby '2.6.6'
 
 gem 'pagy', '~> 3.8', '>= 3.8.3'
 
+gem 'hiredis', '~> 0.6.3'
+gem 'redis', '~> 4.2', '>= 4.2.1', require: ['redis', 'redis/connection/hiredis']
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 # Use postgresql as the database for Active Record
