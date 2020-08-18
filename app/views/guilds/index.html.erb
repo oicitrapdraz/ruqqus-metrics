@@ -41,8 +41,8 @@
             <tbody>
               <% @guilds.each do |guild| %>
               <tr>
-                <% if guild.rank %>
-                <th scope='row'><%= "##{guild.rank}" %></td>
+                <% if guild.id %>
+                <th scope='row'><%= @guild_index[guild.id ] %></td>
                 <% else %>
                 <td>-</td>
                 <% end %>
