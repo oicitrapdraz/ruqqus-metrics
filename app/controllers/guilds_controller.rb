@@ -11,15 +11,18 @@ class GuildsController < ApplicationController
       pagy(Guild.search(search_params).where('data IS NOT NULL').order(subscribers_count: :desc, created_at: :desc), items: 10)
     end
 
-    @statistics = Rails.cache.fetch('index_statistics', expires_in: 5.minutes) do
-      created_guilds_last_day = Guild.where('created_at > ?', 1.day.ago).count
-      created_guilds_last_week = Guild.where('created_at > ?', 1.week.ago).count
-      created_guilds_last_month = Guild.where('created_at > ?', 1.month.ago).count
+    @created_guild_per_day = Rails.cache.fetch('index_date_statistics', expires_in: 5.minutes) do
+      created_guild_per_day = Guild.where("to_timestamp((data->>'created_utc')::integer) > ?", 10.days.ago).group("to_timestamp((data->>'created_utc')::integer)::date").count
 
+      created_guild_per_day.to_a.sort_by(&:first).reverse.to_h
+    end
+
+    @status_statistics = Rails.cache.fetch('index_status_statistics', expires_in: 5.minutes) do
       {
-        created_guilds_last_day: created_guilds_last_day,
-        created_guilds_last_week: created_guilds_last_week,
-        created_guilds_last_month: created_guilds_last_month
+        is_banned: Guild.where("data->>'is_banned' = ?", 'true').count,
+        over_18: Guild.where("data->>'over_18' = ?", 'true').count,
+        is_private: Guild.where("data->>'is_private' = ?", 'true').count,
+        is_restricted: Guild.where("data->>'is_restricted' = ?", 'true').count
       }
     end
   end

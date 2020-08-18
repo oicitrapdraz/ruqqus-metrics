@@ -2,10 +2,19 @@
   <div class='col-xl-2 d-none d-lg-block'>
     <h4 class='sidebar-title'>Statistics</h4>
     <br />
+    <p><strong>Created Guilds in:</strong></p>
     <ul>
-      <li>Created Guilds during the last day: <span class='badge badge-primary'><%= @statistics[:created_guilds_last_day] %></span></li>
-      <li>Created Guilds during the last day: <span class='badge badge-primary'><%= @statistics[:created_guilds_last_week] %></span></li>
-      <li>Created Guilds during the last day: <span class='badge badge-primary'><%= @statistics[:created_guilds_last_month] %></span></li>
+      <% @created_guild_per_day.each do |day, creation_count| %>
+      <li><%= day.strftime("%B %d, %Y") %>: <span class='badge badge-primary'><%= creation_count %></span></li>
+      <% end %>
+    </ul>
+
+    <p><strong>Number of Guilds:</strong></p>
+    <ul>
+      <li>Banned: <span class='badge badge-danger'><%= @status_statistics[:is_banned] %></span></li>
+      <li>Over 18: <span class='badge badge-danger'><%= @status_statistics[:over_18] %></span></li>
+      <li>Private: <span class='badge badge-danger'><%= @status_statistics[:is_private] %></span></li>
+      <li>Restricted: <span class='badge badge-danger'><%= @status_statistics[:is_restricted] %></span></li>
     </ul>
     <br />
   </div>
