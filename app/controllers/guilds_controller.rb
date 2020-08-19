@@ -8,11 +8,11 @@ class GuildsController < ApplicationController
     cache_key = CacheUtils.new.generate_cache_key(controller_path, action_name, index_params)
 
     @guild_index = Rails.cache.fetch('index_guild_indices', expires_in: 5.minutes) do
-      Guild.select('id, ROW_NUMBER() OVER(ORDER BY subscribers_count DESC, created_at DESC) as index').where('data IS NOT NULL').order(subscribers_count: :desc, created_at: :desc).map { |result| [result.id, result.index] }.to_h
+      Guild.select('id, ROW_NUMBER() OVER(ORDER BY subscribers_count DESC, created_at DESC) as index').where('data IS NOT NULL').order('subscribers_count DESC NULLS LAST, created_at DESC').map { |result| [result.id, result.index] }.to_h
     end
 
     @pagy, @guilds = Rails.cache.fetch(cache_key, expires_in: 5.minutes) do
-      pagy(Guild.search(search_params).where('data IS NOT NULL').order(subscribers_count: :desc, created_at: :desc), items: 10)
+      pagy(Guild.search(search_params).where('data IS NOT NULL').order('subscribers_count DESC NULLS LAST, created_at DESC'), items: 10)
     end
 
     @created_guild_per_day = Rails.cache.fetch('index_date_statistics', expires_in: 5.minutes) do

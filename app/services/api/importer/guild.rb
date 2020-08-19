@@ -27,7 +27,7 @@ module API
         ActiveRecord::Base.transaction do
           guild.update!(name: name, mods_count: mods_count, subscribers_count: subscribers_count, data: response)
 
-          ids = ::Guild.where('data IS NOT NULL').order(subscribers_count: :desc, created_at: :desc).ids
+          ids = ::Guild.where('data IS NOT NULL').order('subscribers_count DESC NULLS LAST, created_at DESC').ids
 
           rank = ids.index(guild.id) + 1
 
