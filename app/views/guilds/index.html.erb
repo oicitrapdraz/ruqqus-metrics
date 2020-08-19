@@ -4,9 +4,7 @@
     <br />
     <p><strong>Created Guilds in:</strong></p>
     <ul>
-      <% @created_guild_per_day.each do |day, creation_count| %>
-      <li><%= day.strftime("%B %d, %Y") %>: <span class='badge badge-primary'><%= creation_count %></span></li>
-      <% end %>
+      <li>The last week: <span class='badge badge-primary'><%= @created_guild_last_week %></span></li>
     </ul>
 
     <p><strong>Number of Guilds:</strong></p>
@@ -46,7 +44,7 @@
                 <% else %>
                 <td>-</td>
                 <% end %>
-                <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
+                <td data-toggle='tooltip' data-placement='top' title="<%= guild.data['description']&.lines&.first&.strip %>"><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
                 <% if guild.subscribers_count %>
                 <td><%= guild.subscribers_count %></td>
                 <% else %>

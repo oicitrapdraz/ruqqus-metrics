@@ -15,10 +15,8 @@ class GuildsController < ApplicationController
       pagy(Guild.search(search_params).where('data IS NOT NULL').order('subscribers_count DESC NULLS LAST, created_at DESC'), items: 10)
     end
 
-    @created_guild_per_day = Rails.cache.fetch('index_date_statistics', expires_in: 5.minutes) do
-      created_guild_per_day = Guild.where("to_timestamp((data->>'created_utc')::integer) > ?", 10.days.ago).group("to_timestamp((data->>'created_utc')::integer)::date").count
-
-      created_guild_per_day.to_a.sort_by(&:first).reverse.to_h
+    @created_guild_last_week = Rails.cache.fetch('index_date_statistics', expires_in: 5.minutes) do
+      Guild.where("to_timestamp((data->>'created_utc')::integer) > ?", 1.week.ago).count
     end
 
     @status_statistics = Rails.cache.fetch('index_status_statistics', expires_in: 5.minutes) do
