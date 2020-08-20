@@ -9,7 +9,7 @@ namespace :guilds do
 
     guilds_ids = Guild.select('id, subscribers_count + EXTRACT(EPOCH FROM(current_timestamp - updated_at)) as points')
                       .where('updated_at < ?', 6.hours.ago)
-                      .order(points: :desc)
+                      .order('points DESC NULLS LAST')
                       .limit(number_of_guilds_to_update)
                       .map(&:id)
 
