@@ -18,7 +18,7 @@ module Scraper
 
           guild = ::Guild.find_by('LOWER(name) = LOWER(?)', guild_name)
 
-          return Logg.info('Stopping scrapper since the last guild was found') if guild
+          return Logg.info('Stopping scrapper since the last guild was found') if guild && (page > 100)
 
           ::Guild.create!(name: guild_name)
         end
