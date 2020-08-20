@@ -8,8 +8,9 @@ namespace :guilds do
     number_of_guilds_to_update = Guild.count * 3 / 100
 
     guilds_ids = Guild.select('id, subscribers_count + EXTRACT(EPOCH FROM(current_timestamp - updated_at)) as points')
+                      .where.not("data->>'is_banned' = ?", 'true').or(Guild.where(data: nil))
                       .where('updated_at < ?', 6.hours.ago)
-                      .order('points DESC NULLS LAST')
+                      .order(points: :desc)
                       .limit(number_of_guilds_to_update)
                       .map(&:id)
 
