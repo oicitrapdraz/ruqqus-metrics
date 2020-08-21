@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
+gem 'chartkick', '~> 3.4'
 gem 'pagy', '~> 3.8', '>= 3.8.3'
 
 gem 'hiredis', '~> 0.6.3'

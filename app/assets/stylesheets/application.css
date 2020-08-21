@@ -26,3 +26,11 @@
 .btn-group {
   margin: auto;
 }
+
+.pagy-bootstrap-nav {
+  display: flex;
+}
+
+.pagination {
+  margin: auto;
+}

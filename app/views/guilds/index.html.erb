@@ -1,6 +1,6 @@
 <div class='row'>
   <div class='col-xl-2 d-none d-lg-block'>
-    <h4 class='sidebar-title'>Statistics</h4>
+    <h4 class='sidebar-title'>Basic Statistics</h4>
     <br />
     <p><strong>Created Guilds in:</strong></p>
     <ul>
@@ -17,12 +17,12 @@
     <br />
   </div>
   <div class='col-xl-8'>
-    <div class='table-responsive'>
-      <div class="card">
-        <div class="card-header">
-          <h2 class='title text-center' style='margin-top: 20px;'>Guild Ranking</h2>
-        </div>
-        <div class="card-body">
+    <div class='card'>
+      <div class='card-header'>
+        <h2 class='title text-center' style='margin-top: 20px;'>Guild Ranking</h2>
+      </div>
+      <div class='card-body'>
+        <div class='table-responsive'>
           <table class='table'>
             <thead>
               <tr>
@@ -90,11 +90,11 @@
       </div>
     </div>
     <br />
-    <%== pagy_bootstrap_combo_nav_js(@pagy) %>
+    <%== pagy_bootstrap_nav(@pagy) %>
     <br />
   </div>
   <div class='col-xl-2'>
-    <h4 class='sidebar-title'>Search Filters</h4>
+    <h4 class='sidebar-title'>Filters</h4>
     <br />
     <%= form_with url: guilds_path, method: :get, local: true do |form| %>
     <div class='form-group'>
