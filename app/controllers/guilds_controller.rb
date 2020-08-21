@@ -39,18 +39,29 @@ class GuildsController < ApplicationController
       pagy(@guild.guild_histories.order(created_at: :desc).offset(1), items: 5, size: [1, 0, 0, 1])
     end
 
-    @data_series = Rails.cache.fetch("chart_#{show_params[:id]}", expires_in: 5.minutes) do
+    @data_series = Rails.cache.fetch("chart_#{show_params[:id]}_2", expires_in: 5.seconds) do
       [
         {
           name: 'Subscribers Count',
-          data: @guild_histories.pluck('DATE(created_at), subscribers_count')
-        },
-        {
-          name: 'Rank',
-          data: @guild_histories.pluck('DATE(created_at), rank')
+          data: @guild_histories.pluck("TO_CHAR(created_at, 'DD/MM/YYYY HH:MM:SS'), subscribers_count")
         }
       ]
     end
+
+    @chart_options =
+      {
+        max: @guild_histories.pluck(:subscribers_count).max,
+        min: @guild_histories.pluck(:subscribers_count).min,
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: false
+              }
+            }]
+          }
+        }
+      }
   end
 
   private

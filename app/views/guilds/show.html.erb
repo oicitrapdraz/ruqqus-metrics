@@ -5,7 +5,9 @@
         <h2 class='title text-center' style='margin-top: 20px;'><%= link_to "+#{@guild.name}", "#{RUQQUS_GUILDS_BASE_URL}#{@guild.name}", target: '_blank' %></h2>
       </div>
       <div class='card-body'>
-        <%= line_chart @data_series if (@guild_histories.count > 1) && !@guild.data['is_banned'] %>
+        <div class='d-none d-lg-block'>
+        <%= line_chart @data_series, @chart_options if (@guild_histories.count > 1) && !@guild.data['is_banned'] %>
+        </div>
         <br />
         <div class='table-responsive'>
           <table class='table'>
