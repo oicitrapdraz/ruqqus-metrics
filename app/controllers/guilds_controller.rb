@@ -47,21 +47,6 @@ class GuildsController < ApplicationController
         }
       ]
     end
-
-    @chart_options =
-      {
-        max: @guild_histories.pluck(:subscribers_count).max + 1,
-        min: @guild_histories.pluck(:subscribers_count).min - 1,
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: false
-              }
-            }]
-          }
-        }
-      }
   end
 
   private
