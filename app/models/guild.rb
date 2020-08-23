@@ -30,7 +30,7 @@ class Guild < ApplicationRecord
 
     week_histories = guild_histories.where('created_at > ?', 1.week.ago).order(:created_at).to_a
 
-    return if week.count < 2
+    return if week_histories.count < 2
 
     week_growth = week_histories.last.subscribers_count - week_histories.first.subscribers_count
 
