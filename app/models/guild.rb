@@ -18,4 +18,22 @@ class Guild < ApplicationRecord
 
     scope
   }
+
+  def update_growth
+    month_histories = guild_histories.where('created_at > ?', 1.month.ago).order(:created_at).to_a
+
+    return if month_histories.count < 2
+
+    month_growth = month_histories.last.subscribers_count - month_histories.first.subscribers_count
+
+    update(month_growth: month_growth)
+
+    week_histories = guild_histories.where('created_at > ?', 1.week.ago).order(:created_at).to_a
+
+    return if week.count < 2
+
+    week_growth = week_histories.last.subscribers_count - week_histories.first.subscribers_count
+
+    update(week_growth: week_growth)
+  end
 end

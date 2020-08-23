@@ -33,6 +33,7 @@ module API
 
           guild.update!(rank: rank, updated_at: DateTime.now)
           guild.guild_histories.create!(rank: rank, mods_count: mods_count, subscribers_count: subscribers_count, data: response)
+          guild.update_growth
         end
       rescue StandardError => e
         Logg.error(e)

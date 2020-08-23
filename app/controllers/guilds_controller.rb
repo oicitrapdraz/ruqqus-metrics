@@ -29,6 +29,13 @@ class GuildsController < ApplicationController
     end
   end
 
+  # GET /growth
+  def growth
+    @top_15_week_growth_guilds, @top_15_month_growth_guilds = Rails.cache.fetch('guild_growth', expires_in: 5.minutes) do
+      [Guild.where('week_growth IS NOT NULL').order(week_growth: :desc).limit(15), Guild.where('month_growth IS NOT NULL').order(month_growth: :desc).limit(15)]
+    end
+  end
+
   # GET /guilds/1
   def show
     @guild = Guild.find_by!('LOWER(name) = LOWER(?)', show_params[:id])

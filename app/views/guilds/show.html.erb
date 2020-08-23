@@ -6,7 +6,7 @@
       </div>
       <div class='card-body'>
         <div class='d-none d-lg-block'>
-        <%= line_chart @data_series, { min: nil } if (@guild_histories.count > 1) && !@guild.data['is_banned'] %>
+        <%= line_chart @data_series, { min: nil, height: '225px' } if (@guild_histories.count > 1) && !@guild.data['is_banned'] %>
         </div>
         <br />
         <div class='table-responsive'>
@@ -56,10 +56,10 @@
           </table>
         </div>
       </div>
-      <br />
-      <%== pagy_bootstrap_combo_nav_js(@pagy) %>
-      <br />
     </div>
+    <br />
+    <%== pagy_bootstrap_nav(@pagy) %>
+    <br />
   </div>
   <br />
 </div>
