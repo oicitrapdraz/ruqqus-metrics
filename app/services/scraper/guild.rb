@@ -22,7 +22,7 @@ module Scraper
             return Logg.info('Stopping scrapper since the last guild was found and the minimun quota of pages were scraped')
           end
 
-          ::Guild.create!(name: guild_name)
+          ::Guild.create!(name: guild_name) unless found_guild
         end
 
         current_page += 1
