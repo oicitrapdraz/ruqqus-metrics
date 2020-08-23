@@ -19,7 +19,7 @@
   <div class='col-xl-8'>
     <div class='card'>
       <div class='card-header'>
-        <h2 class='title text-center' style='margin-top: 20px;'>Guild Ranking</h2>
+        <h2 class='title text-center' style='margin-top: 20px;'>Guild Subs Ranking</h2>
       </div>
       <div class='card-body'>
         <div class='table-responsive'>
@@ -40,7 +40,7 @@
               <% @guilds.each do |guild| %>
               <tr>
                 <% if guild.id %>
-                <th scope='row'><%= @guild_index[guild.id ] %></td>
+                <th scope='row'>#<%= @guild_index[guild.id ] %></td>
                 <% else %>
                 <td>-</td>
                 <% end %>
@@ -91,7 +91,6 @@
     </div>
     <br />
     <%== pagy_bootstrap_nav(@pagy) %>
-    <br />
   </div>
   <div class='col-xl-2'>
     <h4 class='sidebar-title'>Filters</h4>
