@@ -6,7 +6,7 @@
       </div>
       <div class='card-body'>
         <div class='d-none d-lg-block'>
-        <%= line_chart @data_series, { min: nil, height: '225px' } if (@guild_histories.count > 1) && !@guild.data['is_banned'] %>
+        <%= line_chart @data_series, { min: nil, height: '225px' } if (@guild_histories.count > 2) && !@guild.data['is_banned'] %>
         </div>
         <br />
         <div class='table-responsive'>

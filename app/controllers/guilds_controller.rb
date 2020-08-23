@@ -43,7 +43,7 @@ class GuildsController < ApplicationController
     cache_key = CacheUtils.new.generate_cache_key(controller_path, action_name, show_params)
 
     @pagy, @guild_histories = Rails.cache.fetch(cache_key, expires_in: 5.minutes) do
-      pagy(@guild.guild_histories.order(created_at: :desc).offset(1), items: 5, size: [1, 0, 0, 1])
+      pagy(@guild.guild_histories.order(created_at: :desc), items: 5, size: [1, 0, 0, 1])
     end
 
     @data_series = Rails.cache.fetch("chart_#{show_params[:id]}_2", expires_in: 5.seconds) do
