@@ -14,7 +14,7 @@ module API
     end
 
     def call
-      uri = URI.parse(CGI.escape(url))
+      uri = URI.parse(URI.escape(url))
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
