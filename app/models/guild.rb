@@ -35,5 +35,7 @@ class Guild < ApplicationRecord
     week_growth = week_histories.last.subscribers_count - week_histories.first.subscribers_count
 
     update(week_growth: week_growth)
+  rescue StandardError => e
+    Logg.error(e)
   end
 end
