@@ -4,15 +4,15 @@
     <br />
     <p><strong>Created Guilds in:</strong></p>
     <ul>
-      <li>The last week: <span class='badge badge-primary'><%= @created_guild_last_week %></span></li>
+      <li>The last week: <span class='badge badge-primary'><%= number_with_delimiter @created_guild_last_week %></span></li>
     </ul>
 
     <p><strong>Number of Guilds:</strong></p>
     <ul>
-      <li>Banned: <span class='badge badge-danger'><%= @status_statistics[:is_banned] %></span></li>
-      <li>Over 18: <span class='badge badge-danger'><%= @status_statistics[:over_18] %></span></li>
-      <li>Private: <span class='badge badge-danger'><%= @status_statistics[:is_private] %></span></li>
-      <li>Restricted: <span class='badge badge-danger'><%= @status_statistics[:is_restricted] %></span></li>
+      <li>Banned: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:is_banned] %></span></li>
+      <li>Over 18: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:over_18] %></span></li>
+      <li>Private: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:is_private] %></span></li>
+      <li>Restricted: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:is_restricted] %></span></li>
     </ul>
     <br />
   </div>
@@ -40,18 +40,18 @@
               <% @guilds.each do |guild| %>
               <tr>
                 <% if guild.id %>
-                <th scope='row'>#<%= @guild_index[guild.id ] %></td>
+                <th scope='row'>#<%= number_with_delimiter @guild_index[guild.id ] %></td>
                 <% else %>
                 <td>-</td>
                 <% end %>
                 <td data-toggle='tooltip' data-placement='top' title="<%= guild.data['description']&.lines&.first&.strip %>"><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
                 <% if guild.subscribers_count %>
-                <td><%= guild.subscribers_count %></td>
+                <td><%= number_with_delimiter guild.subscribers_count %></td>
                 <% else %>
                 <td>-</td>
                 <% end %>
                 <% if guild.mods_count %>
-                <td><%= guild.mods_count %></td>
+                <td><%= number_with_delimiter guild.mods_count %></td>
                 <% else %>
                 <td>-</td>
                 <% end %>

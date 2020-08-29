@@ -20,11 +20,11 @@
                 <th scope='row'>#<%= index + 1 %></th>
                 <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
                 <% if guild.week_growth.positive? %>
-                <td style='color: #009900;'>+<%= guild.week_growth %></td>
+                <td style='color: #009900;'>+<%= number_with_delimiter guild.week_growth %></td>
                 <% elsif guild.week_growth.zero? %>
                 <td>0</td>
                 <% else %>
-                <td style='color: #990000;'>-<%= guild.week_growth %></td>
+                <td style='color: #990000;'>-<%= number_with_delimiter guild.week_growth %></td>
                 <% end %>
               </tr>
               <% end %>
@@ -55,11 +55,11 @@
                 <th>#<%= index + 1 %></th>
                 <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
                 <% if guild.month_growth.positive? %>
-                <td style='color: #009900;'>+<%= guild.month_growth %></td>
+                <td style='color: #009900;'>+<%= number_with_delimiter guild.month_growth %></td>
                 <% elsif guild.month_growth.zero? %>
                 <td>0</td>
                 <% else %>
-                <td style='color: #990000;'>-<%= guild.month_growth %></td>
+                <td style='color: #990000;'>-<%= number_with_delimiter guild.month_growth %></td>
                 <% end %>
               </tr>
               <% end %>

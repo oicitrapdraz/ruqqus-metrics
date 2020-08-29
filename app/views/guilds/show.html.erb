@@ -6,7 +6,7 @@
       </div>
       <div class='card-body'>
         <div class='d-none d-lg-block'>
-        <%= line_chart @data_series, { min: nil, height: '225px' } if (@guild_histories.count > 2) && !@guild.data['is_banned'] %>
+        <%= line_chart @data_series, { min: nil, height: '225px', thousands: ',' } if (@guild_histories.count > 2) && !@guild.data['is_banned'] %>
         </div>
         <br />
         <div class='table-responsive'>
@@ -26,9 +26,9 @@
             <tbody>
               <% @guild_histories.each do |guild_history| %>
               <tr>
-                <th scope='row'><%= "##{guild_history.rank}" %></td>
-                <td><%= guild_history.subscribers_count %></td>
-                <td><%= guild_history.mods_count %></td>
+                <th scope='row'><%= "##{number_with_delimiter guild_history.rank}" %></td>
+                <td><%= number_with_delimiter guild_history.subscribers_count %></td>
+                <td><%= number_with_delimiter guild_history.mods_count %></td>
                 <% if guild_history.data['is_banned'] %>
                 <td><span class='badge badge-success'>T</span></td>
                 <% else %>
