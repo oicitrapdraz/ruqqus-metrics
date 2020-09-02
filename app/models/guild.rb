@@ -6,6 +6,8 @@ class Guild < ApplicationRecord
   validates_presence_of :name
   validates_uniqueness_of :name, case_sensitive: false
 
+  scope :subscribers_count_order, -> { order('subscribers_count DESC NULLS LAST, created_at DESC') }
+
   scope :search, lambda { |params|
     params.reject! { |_, v| v.blank? }
 
