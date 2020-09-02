@@ -4,17 +4,19 @@ require 'net/http'
 
 module API
   class Request
-    attr_reader :url, :method
+    attr_reader :url, :method, :body, :headers
 
     ACCEPTED_METHODS = %w[get post].freeze
 
-    def initialize(url, method)
+    def initialize(url, method, body = nil, headers = nil)
       @url = url
       @method = method
+      @body = body
+      @headers = headers
     end
 
     def call
-      uri = URI.parse(url)
+      uri = URI.parse(URI.escape(url))
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
@@ -28,9 +30,13 @@ module API
                     uri.path
                   end
 
-      response = net_http.new(final_uri)
+      request = net_http.new(uri)
 
-      http.request(response).body
+      headers.each { |key, value| request[key] = value if key.present? && value.present? } if headers
+
+      request.body = body.to_json if body
+
+      http.request(request).body
     rescue StandardError => e
       Logg.error(e)
     end

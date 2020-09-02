@@ -6,6 +6,8 @@ class Guild < ApplicationRecord
   validates_presence_of :name
   validates_uniqueness_of :name, case_sensitive: false
 
+  scope :subscribers_count_order, -> { order('subscribers_count DESC NULLS LAST, created_at DESC') }
+
   scope :search, lambda { |params|
     params.reject! { |_, v| v.blank? }
 
@@ -19,7 +21,23 @@ class Guild < ApplicationRecord
     scope
   }
 
-  scope :find_or_create_by_case_insensitive_name!, lambda { |name|
-    find_by('LOWER(name) = LOWER(?)', name) || create!(name: name)
-  }
+  def update_growth
+    month_histories = guild_histories.where('created_at > ?', 1.month.ago).order(:created_at).to_a
+
+    return if month_histories.count < 2
+
+    month_growth = month_histories.last.subscribers_count - month_histories.first.subscribers_count
+
+    update(month_growth: month_growth)
+
+    week_histories = guild_histories.where('created_at > ?', 1.week.ago).order(:created_at).to_a
+
+    return if week_histories.count < 2
+
+    week_growth = week_histories.last.subscribers_count - week_histories.first.subscribers_count
+
+    update(week_growth: week_growth)
+  rescue StandardError => e
+    Logg.error(e)
+  end
 end

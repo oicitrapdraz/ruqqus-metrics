@@ -1,54 +1,64 @@
 <div class='row'>
-  <div class='col-xl-12'>
-    <h2 class='title text-center'>+<%= @guild.name %> History</h2>
-    <div class='table-responsive'>
-      <table class='table'>
-        <thead>
-          <tr>
-            <th scope='col' style='width: 15%;'>Ranking</th>
-            <th scope='col' style='width: 15%;'>Subscribers</th>
-            <th scope='col' style='width: 10%;'>Mods</th>
-            <th scope='col' style='width: 10%;'>Banned</th>
-            <th scope='col' style='width: 10%;'>Over 18</th>
-            <th scope='col' style='width: 10%;'>Private</th>
-            <th scope='col' style='width: 10%;'>Restricted</th>
-            <th scope='col' style='width: 20%;'></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @guild.guild_histories.each do |guild_history| %>
-          <tr>
-            <th scope='row'><%= "##{guild_history.rank}" %></td>
-            <td><%= guild_history.subscribers_count %></td>
-            <td><%= guild_history.mods_count %></td>
-            <% if guild_history.data['is_banned'] %>
-            <td><span class='badge badge-success'>T</span></td>
-            <% else %>
-            <td><span class='badge badge-danger'>F</span></td>
-            <% end %>
-            <% if guild_history.data['over_18'] %>
-            <td><span class='badge badge-success'>T</span></td>
-            <% else %>
-            <td><span class='badge badge-danger'>F</span></td>
-            <% end %>
-            <% if guild_history.data['is_private'] %>
-            <td><span class='badge badge-success'>T</span></td>
-            <% else %>
-            <td><span class='badge badge-danger'>F</span></td>
-            <% end %>
-            <% if guild_history.data['is_restricted'] %>
-            <td><span class='badge badge-success'>T</span></td>
-            <% else %>
-            <td><span class='badge badge-danger'>F</span></td>
-            <% end %>
-            <td><%= distance_of_time_in_words(DateTime.now, guild_history.created_at) %> ago</td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+  <div class='col-xl-8 offset-xl-2'>
+    <div class='card shadow-sm'>
+      <div class='card-header'>
+        <h2 class='title text-center'><%= link_to "+#{@guild.name}", "https://ruqqus.com/+#{@guild.name}", target: '_blank' %></h2>
+      </div>
+      <div class='card-body'>
+        <div class='d-none d-lg-block'>
+        <%= line_chart @data_series, { min: nil, height: '225px', thousands: ',' } if (@guild_histories.count > 2) && !@guild.data['is_banned'] %>
+        </div>
+        <br />
+        <div class='table-responsive'>
+          <table class='table'>
+            <thead>
+              <tr>
+                <th scope='col' style='width: 15%;'>Ranking</th>
+                <th scope='col' style='width: 15%;'>Subscribers</th>
+                <th scope='col' style='width: 10%;'>Mods</th>
+                <th scope='col' style='width: 10%;'>Banned</th>
+                <th scope='col' style='width: 10%;'>Over 18</th>
+                <th scope='col' style='width: 10%;'>Private</th>
+                <th scope='col' style='width: 10%;'>Restricted</th>
+                <th scope='col' style='width: 20%;'></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @guild_histories.each do |guild_history| %>
+              <tr>
+                <th scope='row'><%= "##{number_with_delimiter guild_history.rank}" %></td>
+                <td><%= number_with_delimiter guild_history.subscribers_count %></td>
+                <td><%= number_with_delimiter guild_history.mods_count %></td>
+                <% if guild_history.data['is_banned'] %>
+                <td><span class='badge badge-success'>T</span></td>
+                <% else %>
+                <td><span class='badge badge-danger'>F</span></td>
+                <% end %>
+                <% if guild_history.data['over_18'] %>
+                <td><span class='badge badge-success'>T</span></td>
+                <% else %>
+                <td><span class='badge badge-danger'>F</span></td>
+                <% end %>
+                <% if guild_history.data['is_private'] %>
+                <td><span class='badge badge-success'>T</span></td>
+                <% else %>
+                <td><span class='badge badge-danger'>F</span></td>
+                <% end %>
+                <% if guild_history.data['is_restricted'] %>
+                <td><span class='badge badge-success'>T</span></td>
+                <% else %>
+                <td><span class='badge badge-danger'>F</span></td>
+                <% end %>
+                <td><%= distance_of_time_in_words(DateTime.now, guild_history.created_at) %> ago</td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <br />
-    <%== pagy_bootstrap_combo_nav_js(@pagy) %>
+    <%== pagy_bootstrap_nav(@pagy) %>
     <br />
   </div>
 </div>
