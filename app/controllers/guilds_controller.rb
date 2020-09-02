@@ -46,7 +46,7 @@ class GuildsController < ApplicationController
       pagy(@guild.guild_histories.order(created_at: :desc), items: 5, size: [1, 0, 0, 1])
     end
 
-    @data_series = Rails.cache.fetch("chart_#{cache_key}", expires_in: 5.seconds) do
+    @data_series = Rails.cache.fetch("chart_#{cache_key}", expires_in: 5.minutes) do
       [
         {
           name: 'Subscribers Count',

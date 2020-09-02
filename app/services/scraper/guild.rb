@@ -2,6 +2,9 @@
 
 module Scraper
   class Guild
+    MINIMUM_SCRAPED_PAGES = 3
+    RUQQUS_SCRAPING_GUILDS_URL = 'https://ruqqus.com/browse?sort=new'
+
     def call
       current_page = 1
 

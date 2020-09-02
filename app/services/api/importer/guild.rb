@@ -5,6 +5,9 @@ module API
     class Guild
       attr_reader :guild
 
+      RUQQUS_API_URL = 'https://ruqqus.com/api/v1'
+      RUQQUS_API_GRANT_CODE = 'https://ruqqus.com/oauth/grant?grant_type=code'
+
       def initialize(guild)
         @guild = guild
       end
@@ -16,7 +19,20 @@ module API
       private
 
       def request_ruqqus
-        JSON.parse API::Request.new("#{RUQQUS_API_URL}/guild/#{guild.name}", 'get').call
+        access_token =
+          Rails.cache.fetch('access_token', expires_in: 55.minutes) do
+            body = {
+              'client_id': ENV['API_CLIENT_ID'],
+              'client_secret': ENV['API_CLIENT_SECRET'],
+              'code': ENV['API_CODE']
+            }
+
+            response = JSON.parse API::Request.new(RUQQUS_API_GRANT_CODE, 'post', body).call
+
+            response['access_token']
+          end
+
+        JSON.parse API::Request.new("#{RUQQUS_API_URL}/guild/#{guild.name}", 'get', nil, { 'Authorization' => "Bearer #{access_token}" }).call
       end
 
       def update_guild_data(response)
