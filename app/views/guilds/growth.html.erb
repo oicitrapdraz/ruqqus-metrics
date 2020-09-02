@@ -1,0 +1,72 @@
+<div class='row'>
+  <div class='col-xl-4 offset-xl-2' style='margin-bottom: 20px;'>
+    <div class='card shadow-sm'>
+      <div class='card-header'>
+        <h2 class='title text-center'>Last Week Subs Growth</h2>
+      </div>
+      <div class='card-body'>
+        <div class='table-responsive'>
+          <table class='table'>
+            <thead>
+              <tr>
+                <th scope='col' style='width: 35%;'>Ranking</th>
+                <th scope='col' style='width: 35%;'>Name</th>
+                <th scope='col' style='width: 10%;'>Growth</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @top_15_week_growth_guilds.each_with_index do |guild, index| %>
+              <tr>
+                <th scope='row'>#<%= index + 1 %></th>
+                <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
+                <% if guild.week_growth.positive? %>
+                <td style='color: #009900;'>+<%= number_with_delimiter guild.week_growth %></td>
+                <% elsif guild.week_growth.zero? %>
+                <td>0</td>
+                <% else %>
+                <td style='color: #990000;'>-<%= number_with_delimiter guild.week_growth %></td>
+                <% end %>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='col-xl-4'>
+    <div class='card shadow-sm'>
+      <div class='card-header'>
+        <h2 class='title text-center'>Last Month Subs Growth</h2>
+      </div>
+      <div class='card-body'>
+        <div class='table-responsive'>
+          <table class='table'>
+            <thead>
+              <tr>
+                <th scope='col' style='width: 35%;'>Ranking</th>
+                <th scope='col' style='width: 35%;'>Name</th>
+                <th scope='col' style='width: 10%;'>Growth</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @top_15_month_growth_guilds.each_with_index do |guild, index| %>
+              <tr>
+                <th>#<%= index + 1 %></th>
+                <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
+                <% if guild.month_growth.positive? %>
+                <td style='color: #009900;'>+<%= number_with_delimiter guild.month_growth %></td>
+                <% elsif guild.month_growth.zero? %>
+                <td>0</td>
+                <% else %>
+                <td style='color: #990000;'>-<%= number_with_delimiter guild.month_growth %></td>
+                <% end %>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

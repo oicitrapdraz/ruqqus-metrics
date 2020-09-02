@@ -15,14 +15,16 @@
  *= require_self
  */
 
-.title {
+h2.title.text-center {
   height: 50px;
+  margin-top: 20px;
 }
 
-.sidebar-title {
-  padding-top: 50px;
+.pagy-bootstrap-nav {
+  display: flex;
 }
 
-.btn-group {
+.pagination {
   margin: auto;
+  padding: 20px;
 }
