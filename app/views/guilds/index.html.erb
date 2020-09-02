@@ -1,122 +1,130 @@
 <div class='row'>
-  <div class='col-xl-2 d-none d-lg-block'>
-    <h4 class='sidebar-title'>Basic Statistics</h4>
-    <br />
-    <p><strong>Created Guilds in:</strong></p>
-    <ul>
-      <li>The last week: <span class='badge badge-primary'><%= number_with_delimiter @created_guild_last_week %></span></li>
-    </ul>
-
-    <p><strong>Number of Guilds:</strong></p>
-    <ul>
-      <li>Banned: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:is_banned] %></span></li>
-      <li>Over 18: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:over_18] %></span></li>
-      <li>Private: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:is_private] %></span></li>
-      <li>Restricted: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:is_restricted] %></span></li>
-    </ul>
-    <br />
+<div class='col-xl-2 d-none d-lg-block'>
+  <div class='card shadow-sm'>
+    <div class='card-header'>
+      <h2 class='title text-center'>Basic Statistics</h2>
+    </div>
+    <div class='card-body'>
+      <p><strong>Created Guilds in:</strong></p>
+      <ul>
+        <li>The last week: <span class='badge badge-primary'><%= number_with_delimiter @created_guild_last_week %></span></li>
+      </ul>
+      <p><strong>Number of Guilds:</strong></p>
+      <ul>
+        <li>Banned: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:is_banned] %></span></li>
+        <li>Over 18: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:over_18] %></span></li>
+        <li>Private: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:is_private] %></span></li>
+        <li>Restricted: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:is_restricted] %></span></li>
+      </ul>
+      <br />
+    </div>
   </div>
-  <div class='col-xl-8'>
-    <div class='card'>
-      <div class='card-header'>
-        <h2 class='title text-center' style='margin-top: 20px;'>Guild Subs Ranking</h2>
-      </div>
-      <div class='card-body'>
-        <div class='table-responsive'>
-          <table class='table'>
-            <thead>
-              <tr>
-                <th scope='col' style='width: 10%;'>Ranking</th>
-                <th scope='col' style='width: 35%;'>Name</th>
-                <th scope='col' style='width: 15%;'>Subscribers</th>
-                <th scope='col' style='width: 8%;'>Mods</th>
-                <th scope='col' style='width: 8%;'>Banned</th>
-                <th scope='col' style='width: 8%;'>Over 18</th>
-                <th scope='col' style='width: 8%;'>Private</th>
-                <th scope='col' style='width: 8%;'>Restricted</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @guilds.each do |guild| %>
-              <tr>
-                <% if guild.id %>
-                <th scope='row'>#<%= number_with_delimiter @guild_index[guild.id ] %></td>
+</div>
+<div class='col-xl-8'>
+  <div class='card shadow-sm'>
+    <div class='card-header'>
+      <h2 class='title text-center'>Guild Subs Ranking</h2>
+    </div>
+    <div class='card-body'>
+      <div class='table-responsive'>
+        <table class='table'>
+          <thead>
+            <tr>
+              <th scope='col' style='width: 10%;'>Ranking</th>
+              <th scope='col' style='width: 35%;'>Name</th>
+              <th scope='col' style='width: 15%;'>Subscribers</th>
+              <th scope='col' style='width: 8%;'>Mods</th>
+              <th scope='col' style='width: 8%;'>Banned</th>
+              <th scope='col' style='width: 8%;'>Over 18</th>
+              <th scope='col' style='width: 8%;'>Private</th>
+              <th scope='col' style='width: 8%;'>Restricted</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @guilds.each do |guild| %>
+            <tr>
+              <% if guild.id %>
+              <th scope='row'>#<%= number_with_delimiter @guild_index[guild.id ] %></td>
                 <% else %>
-                <td>-</td>
-                <% end %>
-                <td data-toggle='tooltip' data-placement='top' title="<%= guild.data['description']&.lines&.first&.strip %>"><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
-                <% if guild.subscribers_count %>
-                <td><%= number_with_delimiter guild.subscribers_count %></td>
-                <% else %>
-                <td>-</td>
-                <% end %>
-                <% if guild.mods_count %>
-                <td><%= number_with_delimiter guild.mods_count %></td>
-                <% else %>
-                <td>-</td>
-                <% end %>
-                <% if guild.data %>
-                <% if guild.data['is_banned'] %>
-                <td><span class='badge badge-success'>T</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>F</span></td>
-                <% end %>
-                <% if guild.data['over_18'] %>
-                <td><span class='badge badge-success'>T</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>F</span></td>
-                <% end %>
-                <% if guild.data['is_private'] %>
-                <td><span class='badge badge-success'>T</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>F</span></td>
-                <% end %>
-                <% if guild.data['is_restricted'] %>
-                <td><span class='badge badge-success'>T</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>F</span></td>
-                <% end %>
-                <% else %>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <% end %>
-              </tr>
+              <td>-</td>
               <% end %>
-            </tbody>
-          </table>
-        </div>
+              <td data-toggle='tooltip' data-placement='top' title="<%= guild.data['description']&.lines&.first&.strip %>"><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
+              <% if guild.subscribers_count %>
+              <td><%= number_with_delimiter guild.subscribers_count %></td>
+              <% else %>
+              <td>-</td>
+              <% end %>
+              <% if guild.mods_count %>
+              <td><%= number_with_delimiter guild.mods_count %></td>
+              <% else %>
+              <td>-</td>
+              <% end %>
+              <% if guild.data %>
+              <% if guild.data['is_banned'] %>
+              <td><span class='badge badge-success'>T</span></td>
+              <% else %>
+              <td><span class='badge badge-danger'>F</span></td>
+              <% end %>
+              <% if guild.data['over_18'] %>
+              <td><span class='badge badge-success'>T</span></td>
+              <% else %>
+              <td><span class='badge badge-danger'>F</span></td>
+              <% end %>
+              <% if guild.data['is_private'] %>
+              <td><span class='badge badge-success'>T</span></td>
+              <% else %>
+              <td><span class='badge badge-danger'>F</span></td>
+              <% end %>
+              <% if guild.data['is_restricted'] %>
+              <td><span class='badge badge-success'>T</span></td>
+              <% else %>
+              <td><span class='badge badge-danger'>F</span></td>
+              <% end %>
+              <% else %>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
-    <br />
-    <%== pagy_bootstrap_nav(@pagy) %>
   </div>
-  <div class='col-xl-2'>
-    <h4 class='sidebar-title'>Filters</h4>
-    <br />
-    <%= form_with url: guilds_path, method: :get, local: true do |form| %>
-    <div class='form-group'>
-      <%= form.text_field :name, value: params[:name], placeholder: 'Name', class: 'form-control' %>
+  <br />
+  <%== pagy_bootstrap_nav(@pagy) %>
+</div>
+<div class='col-xl-2'>
+  <div class='card shadow-sm'>
+    <div class='card-header'>
+      <h2 class='title text-center'>Filters</h2>
     </div>
-    <div class='form-group'>
-      <%= form.label :is_banned, 'Banned' %>
-      <%= form.select :is_banned, options_for_select([['Banned', true], ['Not Banned', false]], params[:is_banned]), { include_blank: 'All' }, class: 'form-control' %>
+    <div class='card-body'>
+      <%= form_with url: guilds_path, method: :get, local: true do |form| %>
+      <div class='form-group'>
+        <%= form.text_field :name, value: params[:name], placeholder: 'Name', class: 'form-control' %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :is_banned, 'Banned' %>
+        <%= form.select :is_banned, options_for_select([['Banned', true], ['Not Banned', false]], params[:is_banned]), { include_blank: 'All' }, class: 'form-control' %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :over_18, 'Over 18' %>
+        <%= form.select :over_18, options_for_select([['Over 18', true], ['Not Over 18', false]], params[:over_18]), { include_blank: 'All' }, class: 'form-control' %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :is_private, 'Private' %>
+        <%= form.select :is_private, options_for_select([['Private', true], ['Not Private', false]], params[:is_private]), { include_blank: 'All' }, class: 'form-control' %>
+      </div>
+      <div class='form-group'>
+        <%= form.label :is_restricted, 'Restricted' %>
+        <%= form.select :is_restricted, options_for_select([['Restricted', true], ['Not Restricted', false]], params[:is_restricted]), { include_blank: 'All' }, class: 'form-control' %>
+      </div>
+      <%= submit_tag 'Filter', class: 'btn btn-primary' %>
+      <% end %>
+      <br />
     </div>
-    <div class='form-group'>
-      <%= form.label :over_18, 'Over 18' %>
-      <%= form.select :over_18, options_for_select([['Over 18', true], ['Not Over 18', false]], params[:over_18]), { include_blank: 'All' }, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <%= form.label :is_private, 'Private' %>
-      <%= form.select :is_private, options_for_select([['Private', true], ['Not Private', false]], params[:is_private]), { include_blank: 'All' }, class: 'form-control' %>
-    </div>
-    <div class='form-group'>
-      <%= form.label :is_restricted, 'Restricted' %>
-      <%= form.select :is_restricted, options_for_select([['Restricted', true], ['Not Restricted', false]], params[:is_restricted]), { include_blank: 'All' }, class: 'form-control' %>
-    </div>
-    <%= submit_tag 'Filter', class: 'btn btn-primary' %>
-    <% end %>
-    <br />
   </div>
 </div>

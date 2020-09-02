@@ -15,16 +15,9 @@
  *= require_self
  */
 
-.title {
+h2.title.text-center {
   height: 50px;
-}
-
-.sidebar-title {
-  padding-top: 50px;
-}
-
-.btn-group {
-  margin: auto;
+  margin-top: 20px;
 }
 
 .pagy-bootstrap-nav {
@@ -33,4 +26,5 @@
 
 .pagination {
   margin: auto;
+  padding: 20px;
 }
