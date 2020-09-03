@@ -32,8 +32,6 @@ module API
             response['access_token']
           end
 
-        byebug
-
         JSON.parse API::Request.new("#{RUQQUS_API_URL}/guild/#{guild.name}", 'get', nil, { 'Authorization' => "Bearer #{access_token}" }).call
       end
 
