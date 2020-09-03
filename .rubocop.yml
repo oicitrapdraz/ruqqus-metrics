@@ -20,5 +20,5 @@ Style/Documentation:
 Style/ClassAndModuleChildren:
   Enabled: false
 
-Layout/LineLength:
+Metrics/LineLength:
   Max: 120

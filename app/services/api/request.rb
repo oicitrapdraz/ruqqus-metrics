@@ -30,11 +30,11 @@ module API
                     uri.path
                   end
 
-      request = net_http.new(uri)
+      request = net_http.new(final_uri)
 
       headers.each { |key, value| request[key] = value if key.present? && value.present? } if headers
 
-      request.body = body.to_json if body
+      request.set_form_data(body) if body
 
       http.request(request).body
     rescue StandardError => e
