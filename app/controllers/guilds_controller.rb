@@ -50,7 +50,7 @@ class GuildsController < ApplicationController
       [
         {
           name: 'Subscribers Count',
-          data: @guild_histories.pluck("TO_CHAR(created_at, 'MM/DD/YYYY HH:MM:SS'), subscribers_count").reverse
+          data: @guild_histories.pluck("TO_CHAR(created_at, 'MM/DD/YYYY HH24:MI:SS'), subscribers_count").reverse
         }
       ]
     end
