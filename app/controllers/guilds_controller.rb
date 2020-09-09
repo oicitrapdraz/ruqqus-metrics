@@ -46,6 +46,13 @@ class GuildsController < ApplicationController
       pagy(@guild.guild_histories.order(created_at: :desc), items: 5, size: [1, 0, 0, 1])
     end
 
+    if @guild_histories.size > 1
+      hours_difference = (@guild_histories.first.created_at - @guild_histories.last.created_at).to_i / ( 60 * 60 )
+      subscribers_count_difference = @guild_histories.first.subscribers_count - @guild_histories.last.subscribers_count
+
+      @daily_average_growth = ((subscribers_count_difference / hours_difference.to_f) * 24).round(1) unless hours_difference.zero?
+    end
+
     @data_series = Rails.cache.fetch("chart_#{cache_key}", expires_in: 5.minutes) do
       [
         {

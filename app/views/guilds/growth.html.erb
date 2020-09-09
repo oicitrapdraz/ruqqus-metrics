@@ -1,8 +1,8 @@
 <div class='row'>
-  <div class='col-xl-4 offset-xl-2' style='margin-bottom: 20px;'>
+  <div class='col-xl-5 offset-xl-1' style='margin-bottom: 20px;'>
     <div class='card shadow-sm'>
       <div class='card-header'>
-        <h2 class='title text-center'>Last Week Subs Growth</h2>
+        <h2 class='title text-center'>Last Week Growth</h2>
       </div>
       <div class='card-body'>
         <div class='table-responsive'>
@@ -20,11 +20,11 @@
                 <th scope='row'>#<%= index + 1 %></th>
                 <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
                 <% if guild.week_growth.positive? %>
-                <td style='color: #009900;'>+<%= number_with_delimiter guild.week_growth %></td>
+                <td><span class='badge badge-success'>+<%= number_with_delimiter guild.week_growth %></span></td>
                 <% elsif guild.week_growth.zero? %>
-                <td>0</td>
+                <td><span class='badge badge-secondary'>0</span></td>
                 <% else %>
-                <td style='color: #990000;'>-<%= number_with_delimiter guild.week_growth %></td>
+                <td><span class='badge badge-danger'>-<%= number_with_delimiter guild.week_growth %></span></td>
                 <% end %>
               </tr>
               <% end %>
@@ -34,10 +34,10 @@
       </div>
     </div>
   </div>
-  <div class='col-xl-4'>
+  <div class='col-xl-5'>
     <div class='card shadow-sm'>
       <div class='card-header'>
-        <h2 class='title text-center'>Last Month Subs Growth</h2>
+        <h2 class='title text-center'>Last Month Growth</h2>
       </div>
       <div class='card-body'>
         <div class='table-responsive'>
@@ -55,11 +55,11 @@
                 <th>#<%= index + 1 %></th>
                 <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
                 <% if guild.month_growth.positive? %>
-                <td style='color: #009900;'>+<%= number_with_delimiter guild.month_growth %></td>
+                <td><span class='badge badge-success'>+<%= number_with_delimiter guild.month_growth %></span></td>
                 <% elsif guild.month_growth.zero? %>
-                <td>0</td>
+                <td><span class='badge badge-secondary'>0</span></td>
                 <% else %>
-                <td style='color: #990000;'>-<%= number_with_delimiter guild.month_growth %></td>
+                <td><span class='badge badge-danger'>-<%= number_with_delimiter guild.month_growth %></span></td>
                 <% end %>
               </tr>
               <% end %>
