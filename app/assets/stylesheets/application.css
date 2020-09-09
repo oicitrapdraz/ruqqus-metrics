@@ -15,7 +15,7 @@
  *= require_self
  */
 
-h2.title.text-center {
+h3.title.text-center {
   height: 50px;
   margin-top: 20px;
 }

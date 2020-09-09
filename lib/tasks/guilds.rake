@@ -1,11 +1,11 @@
 namespace :guilds do
   desc "Updates the statistics of some Guilds"
   task update: :environment do
-    # This task will update the top 2% Guilds (ordered by the formula subscribers_count + seconds since their last update) to update
+    # This task will update the top 0.5% Guilds (ordered by the formula subscribers_count + seconds since their last update) to update
     # them again, in other words guilds with more people and/or which have not been updated for a long time are prioritized, but it
     # also avoid to update the same guild more than once every 12 hours
 
-    number_of_guilds_to_update = Guild.count * 2 / 100
+    number_of_guilds_to_update = Guild.count / 200
 
     guilds_ids = Guild.where
                       .not("data->>'is_banned' = ?", 'true')
