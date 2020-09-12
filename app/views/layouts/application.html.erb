@@ -23,6 +23,9 @@
         <div class='navbar-nav'>
           <a class='nav-item nav-link <%= 'active' if growth_path.eql? request.env['PATH_INFO'] %>' href='/growth'>Guild Growth</a>
         </div>
+        <div class='navbar-nav'>
+          <a class='nav-item nav-link <%= 'active' if new_guild_path.eql? request.env['PATH_INFO'] %>' href='/guilds/new'>Add Missing Guilds</a>
+        </div>
         <div class='navbar-nav ml-auto'>
           <a class='nav-item nav-link <%= 'active' if about_path.eql? request.env['PATH_INFO'] %>' href='/about'>About</a>
         </div>

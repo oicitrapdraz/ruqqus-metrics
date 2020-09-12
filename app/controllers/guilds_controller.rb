@@ -47,10 +47,12 @@ class GuildsController < ApplicationController
     end
 
     if @guild_histories.size > 1
-      hours_difference = (@guild_histories.first.created_at - @guild_histories.last.created_at).to_i / ( 60 * 60 )
+      hours_difference = (@guild_histories.first.created_at - @guild_histories.last.created_at).to_i / (60 * 60)
       subscribers_count_difference = @guild_histories.first.subscribers_count - @guild_histories.last.subscribers_count
 
-      @daily_average_growth = ((subscribers_count_difference / hours_difference.to_f) * 24).round(1) unless hours_difference.zero?
+      unless hours_difference.zero?
+        @daily_average_growth = ((subscribers_count_difference / hours_difference.to_f) * 24).round(1)
+      end
     end
 
     @data_series = Rails.cache.fetch("chart_#{cache_key}", expires_in: 5.minutes) do
@@ -61,6 +63,21 @@ class GuildsController < ApplicationController
         }
       ]
     end
+  end
+
+  # GET /guilds/1
+  def new; end
+
+  # POST /guilds
+  def create
+    if verify_recaptcha(response: create_params['g-recaptcha-response'])
+      GuildCreator.new(create_params[:name]).call
+      flash = { notice: 'Thanks for your contribution, if this Guild exists and is not in our database, it will be added in less than a day.' }
+    else
+      flash = { alert: 'Please solve the reCAPTCHA.' }
+    end
+
+    redirect_to new_guild_path, flash
   end
 
   private
@@ -75,5 +92,9 @@ class GuildsController < ApplicationController
 
   def search_params
     params.permit(:name, :is_banned, :over_18, :is_private, :is_restricted)
+  end
+
+  def create_params
+    params.permit(:name, 'g-recaptcha-response')
   end
 end

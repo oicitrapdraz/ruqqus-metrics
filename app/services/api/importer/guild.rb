@@ -6,7 +6,6 @@ module API
       attr_reader :guild
 
       RUQQUS_API_URL = 'https://ruqqus.com/api/v1'
-      RUQQUS_API_REFRESH_TOKEN = 'https://ruqqus.com/oauth/grant?grant_type=refresh'
 
       def initialize(guild)
         @guild = guild
@@ -19,18 +18,7 @@ module API
       private
 
       def request_ruqqus
-        access_token =
-          Rails.cache.fetch('access_token', expires_in: 5.minutes) do
-            body = {
-              'client_id' => ENV['API_CLIENT_ID'],
-              'client_secret' => ENV['API_CLIENT_SECRET'],
-              'refresh_token' => ENV['API_REFRESH_TOKEN']
-            }
-
-            response = JSON.parse API::Request.new(RUQQUS_API_REFRESH_TOKEN, 'post', body).call
-
-            response['access_token']
-          end
+        access_token = API::AccessToken.new.call
 
         JSON.parse API::Request.new("#{RUQQUS_API_URL}/guild/#{guild.name}", 'get', nil, { 'Authorization' => "Bearer #{access_token}" }).call
       end

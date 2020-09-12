@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   get 'growth', to: 'guilds#growth'
   get 'about', to: 'home#about'
 
-  resources :guilds, only: %i[index show]
+  resources :guilds, only: %i[index show new create]
 end
