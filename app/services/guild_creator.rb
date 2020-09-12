@@ -34,7 +34,7 @@ class GuildCreator
   end
 
   def create_guild
-    Guild.create!(name)
+    Guild.create!(name: name)
   rescue StandardError => e
     Logg.error(e)
   end
