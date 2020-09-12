@@ -16,7 +16,7 @@
           <h3 class='title text-center'>Add a Missing Guild</h3>
         </div>
         <div class='card-body text-center'>
-          <p>The entry of new Guilds is done by a web scraper form, which runs automatically and periodically. The problem is that this scraper does not detect NSFW Guilds, you can verify that they don't appear in <a href='https://ruqqus.com/browse'>this link</a> if you sign out. Besides Guilds that are removed very quickly may not be entered either. That's why I created this view so you can add Guilds that do not appear here.</p>
+          <p>The entry of new Guilds is done by a web scraper which runs automatically and periodically. However this scraper doesn't detect NSFW Guilds, you can verify that they don't appear in <a href='https://ruqqus.com/browse'>this link</a> if you sign out. Besides Guilds that are removed very quickly may not be entered either. For these and other scenarios of which I have no knowledge that prevent the automatic entry of Guilds, I created this view so you can add some of your interest.</p>
           <div class='col-xl-6 offset-xl-3'>
             <%= form_with url: guilds_path, method: :post, local: true do |form| %>
             <div class='form-group'>
