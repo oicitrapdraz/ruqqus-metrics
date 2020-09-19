@@ -16,13 +16,14 @@
           <h3 class='title text-center'>Add a Missing Guild</h3>
         </div>
         <div class='card-body text-center'>
-          <p>The entry of new Guilds is done by a web scraper which runs automatically and periodically. However this scraper doesn't detect NSFW Guilds, you can verify that they don't appear in <a href='https://ruqqus.com/browse'>this link</a> if you sign out. Besides Guilds that are removed very quickly may not be entered either. For these and other scenarios that may exist, I created this view so you can add some of your interest.</p>
+          <p>The entry of new Guilds is done by a web scraper which runs automatically and periodically. However this scraper doesn't detect NSFW Guilds, also Guilds that are banned very quickly may not be entered either. For these and other scenarios that may exist I have created this form.</p>
+          <p>Behind the scenes, when you submit the name of a Guild that doesn't match any record in my database, I'll call Ruqqus' API and if I get a correct response I'll insert it, but keep in mind that it will not appear in the rankings immediately, it will take a few hours.</p>
           <div class='col-xl-6 offset-xl-3'>
             <%= form_with url: guilds_path, method: :post, local: true do |form| %>
             <div class='form-group'>
               <%= form.text_field :name, placeholder: 'Name', class: 'form-control' %>
             </div>
-            <div style='margin: 0px 10px 10px 0px;'>
+            <div style='margin: 0px 10px 10px 0px; transform: scale(0.8); transform-origin: 0 0;'>
               <%= recaptcha_tags %>
             </div>
             <%= submit_tag 'Submit', class: 'btn btn-primary' %>
