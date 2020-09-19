@@ -60,26 +60,10 @@
                 <td>-</td>
                 <% end %>
                 <% if guild.data %>
-                <% if guild.data['is_banned'] %>
-                <td><span class='badge badge-success'>T</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>F</span></td>
-                <% end %>
-                <% if guild.data['over_18'] %>
-                <td><span class='badge badge-success'>T</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>F</span></td>
-                <% end %>
-                <% if guild.data['is_private'] %>
-                <td><span class='badge badge-success'>T</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>F</span></td>
-                <% end %>
-                <% if guild.data['is_restricted'] %>
-                <td><span class='badge badge-success'>T</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>F</span></td>
-                <% end %>
+                <td><%= display_boolean guild.data['is_banned'] %></td>
+                <td><%= display_boolean guild.data['over_18'] %></td>
+                <td><%= display_boolean guild.data['is_private'] %></td>
+                <td><%= display_boolean guild.data['is_restricted'] %></td>
                 <% else %>
                 <td>-</td>
                 <td>-</td>

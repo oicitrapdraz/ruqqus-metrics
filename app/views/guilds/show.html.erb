@@ -7,13 +7,7 @@
       </div>
       <div class='card-body'>
         <ul>
-          <% if @daily_average_growth.positive? %>
-          <li>Daily growth: <span class='badge badge-success'>+<%= @daily_average_growth %></span></li>
-          <% elsif @daily_average_growth.zero? %>
-          <li>Daily growth: <span class='badge badge-secondary'><%= @daily_average_growth %></span></li>
-          <% else %>
-          <li>Daily growth: <span class='badge badge-danger'>-<%= @daily_average_growth %></span></li>
-          <% end %>
+          <li>Daily growth: <%= display_number(@daily_average_growth) %></li>
         </ul>
         <br />
       </div>
@@ -50,26 +44,10 @@
                 <th scope='row'><%= "##{number_with_delimiter guild_history.rank}" %></td>
                 <td><%= number_with_delimiter guild_history.subscribers_count %></td>
                 <td><%= number_with_delimiter guild_history.mods_count %></td>
-                <% if guild_history.data['is_banned'] %>
-                <td><span class='badge badge-success'>T</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>F</span></td>
-                <% end %>
-                <% if guild_history.data['over_18'] %>
-                <td><span class='badge badge-success'>T</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>F</span></td>
-                <% end %>
-                <% if guild_history.data['is_private'] %>
-                <td><span class='badge badge-success'>T</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>F</span></td>
-                <% end %>
-                <% if guild_history.data['is_restricted'] %>
-                <td><span class='badge badge-success'>T</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>F</span></td>
-                <% end %>
+                <td><%= display_boolean guild_history.data['is_banned'] %></td>
+                <td><%= display_boolean guild_history.data['over_18'] %></td>
+                <td><%= display_boolean guild_history.data['is_private'] %></td>
+                <td><%= display_boolean guild_history.data['is_restricted'] %></td>
                 <td><%= distance_of_time_in_words(DateTime.now, guild_history.created_at) %> ago</td>
               </tr>
               <% end %>

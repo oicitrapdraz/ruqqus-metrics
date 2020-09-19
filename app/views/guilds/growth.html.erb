@@ -19,13 +19,7 @@
               <tr>
                 <th scope='row'>#<%= index + 1 %></th>
                 <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
-                <% if guild.week_growth.positive? %>
-                <td><span class='badge badge-success'>+<%= number_with_delimiter guild.week_growth %></span></td>
-                <% elsif guild.week_growth.zero? %>
-                <td><span class='badge badge-secondary'>0</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>-<%= number_with_delimiter guild.week_growth %></span></td>
-                <% end %>
+                <td><%= display_number(guild.week_growth) %></td>
               </tr>
               <% end %>
             </tbody>
@@ -54,13 +48,7 @@
               <tr>
                 <th>#<%= index + 1 %></th>
                 <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
-                <% if guild.month_growth.positive? %>
-                <td><span class='badge badge-success'>+<%= number_with_delimiter guild.month_growth %></span></td>
-                <% elsif guild.month_growth.zero? %>
-                <td><span class='badge badge-secondary'>0</span></td>
-                <% else %>
-                <td><span class='badge badge-danger'>-<%= number_with_delimiter guild.month_growth %></span></td>
-                <% end %>
+                <td><%= display_number(guild.month_growth) %></td>
               </tr>
               <% end %>
             </tbody>
