@@ -19,17 +19,17 @@
         <span class='navbar-toggler-icon'></span>
       </button>
       <div class='collapse navbar-collapse' id='navbarNavAltMarkup'>
-        <div class='navbar-nav'>
-          <a class='nav-item nav-link <%= 'active' if root_path.eql? request.env['PATH_INFO'] %>' href='/'>Guild Ranking</a>
+        <div class='navbar-nav border-right'>
+          <a class='nav-item nav-link <%= 'active' if root_path.eql? request.env['PATH_INFO'] %>' href='/'>Guild Ranking <i class='fas fa-globe'></i></i></a>
         </div>
-        <div class='navbar-nav'>
-          <a class='nav-item nav-link <%= 'active' if growth_path.eql? request.env['PATH_INFO'] %>' href='/growth'>Guild Growth</a>
+        <div class='navbar-nav border-right'>
+          <a class='nav-item nav-link <%= 'active' if growth_path.eql? request.env['PATH_INFO'] %>' href='/growth'>Guild Growth <i class='fas fa-chart-line'></i></a>
         </div>
-        <div class='navbar-nav'>
-          <a class='nav-item nav-link <%= 'active' if new_guild_path.eql? request.env['PATH_INFO'] %>' href='/guilds/new'>Add Missing Guilds</a>
+        <div class='navbar-nav border-right'>
+          <a class='nav-item nav-link <%= 'active' if new_guild_path.eql? request.env['PATH_INFO'] %>' href='/guilds/new'>Add Missing Guilds <i class='fas fa-plus-square'></i></a>
         </div>
-        <div class='navbar-nav ml-auto'>
-          <a class='nav-item nav-link <%= 'active' if about_path.eql? request.env['PATH_INFO'] %>' href='/about'>About</a>
+        <div class='navbar-nav ml-auto border-left'>
+          <a class='nav-item nav-link <%= 'active' if about_path.eql? request.env['PATH_INFO'] %>' href='/about'>About <i class='fas fa-info-circle'></i></a>
         </div>
       </div>
     </nav>

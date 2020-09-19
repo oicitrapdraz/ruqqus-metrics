@@ -5,11 +5,11 @@
         <h3 class='title text-center'>Statistics</h3>
       </div>
       <div class='card-body'>
-        <p><strong>Created Guilds in:</strong></p>
+        <p><strong># Created Guilds in:</strong></p>
         <ul>
           <li>The last week: <span class='badge badge-primary'><%= number_with_delimiter @created_guild_last_week %></span></li>
         </ul>
-        <p><strong>Number of Guilds:</strong></p>
+        <p><strong># Guilds:</strong></p>
         <ul>
           <li>Banned: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:is_banned] %></span></li>
           <li>Over 18: <span class='badge badge-danger'><%= number_with_delimiter @status_statistics[:over_18] %></span></li>
@@ -23,7 +23,7 @@
   <div class='col-xl-8'>
     <div class='card shadow-sm'>
       <div class='card-header'>
-        <h3 class='title text-center'>Guild Subs Ranking</h3>
+        <h3 class='title text-center'>Guilds Ranking</h3>
       </div>
       <div class='card-body'>
         <div class='table-responsive'>
@@ -99,7 +99,7 @@
   <div class='col-xl-2'>
     <div class='card shadow-sm'>
       <div class='card-header'>
-        <h3 class='title text-center'>Filters</h3>
+        <h3 class='title text-center'>Filters <i class='fas fa-filter'></i></h3>
       </div>
       <div class='card-body'>
         <%= form_with url: guilds_path, method: :get, local: true do |form| %>
