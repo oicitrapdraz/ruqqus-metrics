@@ -17,14 +17,10 @@
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
-
       gtag('config', 'UA-73025506-3');
 
       document.addEventListener('turbolinks:load', event => {
-          if (typeof(ga) === 'function') {
-            ga('set', 'location', event.data.url)
-            ga('send', 'pageview')
-        }
+        gtag('config', 'UA-73025506-3', { 'page_location': event.data.url });
       });
     </script>
     <% end %>
