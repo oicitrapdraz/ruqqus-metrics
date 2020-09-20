@@ -41,6 +41,7 @@ module API
         end
       rescue StandardError => e
         Logg.error(e)
+        Logg.info("Requested Guild was Guild with ID #{guild.id} and name #{guild.name}")
       end
     end
   end
