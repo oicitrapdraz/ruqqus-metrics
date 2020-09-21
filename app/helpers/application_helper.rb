@@ -19,13 +19,13 @@ module ApplicationHelper
     end
   end
 
-  def display_guild_logo(guild)
-    if guild.data
+  def display_guild_logo(guild, max_size)
+    if guild.data && guild.data['profile_url']
       profile_url = guild.data['profile_url'].start_with?('/assets/') ? 'logo.png' : guild.data['profile_url']
 
-      image_tag(profile_url, style: 'max-width: 50px; max-height: 50px; border-radius: 25px; border: 2px solid #73AD21;')
+      image_tag(profile_url, style: "max-width: #{max_size}px; max-height: #{max_size}px; border-radius: #{max_size / 2}px; border: 2px solid #73AD21;")
     else
-      content_tag(:i, class: 'fas fa-users')
+      image_tag('logo.png', style: "max-width: #{max_size}px; max-height: #{max_size}px; border-radius: #{max_size / 2}px; border: 2px solid #73AD21;")
     end
   end
 end

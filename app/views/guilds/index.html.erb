@@ -27,17 +27,17 @@
       </div>
       <div class='card-body'>
         <div class='table-responsive'>
-          <table class='table table-borderless'>
+          <table class='table table-borderless' style='width: 850px;'>
             <thead>
               <tr>
                 <th scope='col' style='width: 10%;'>Ranking</th>
-                <th scope='col' style='width: 35%;'>Name</th>
-                <th scope='col' style='width: 15%;'>Subscribers</th>
-                <th scope='col' style='width: 8%;'>Mods</th>
-                <th scope='col' style='width: 8%;'>Banned</th>
-                <th scope='col' style='width: 8%;'>Over 18</th>
-                <th scope='col' style='width: 8%;'>Private</th>
-                <th scope='col' style='width: 8%;'>Restricted</th>
+                <th scope='col' style='width: 70%;'>Name</th>
+                <th scope='col' style='width: 10%;'>Subscribers</th>
+                <th scope='col' style='width: 2%;'>Mods</th>
+                <th scope='col' style='width: 2%;'>Banned</th>
+                <th scope='col' style='width: 2%;'>Over 18</th>
+                <th scope='col' style='width: 2%;'>Private</th>
+                <th scope='col' style='width: 2%;'>Restricted</th>
               </tr>
             </thead>
             <tbody>
@@ -48,7 +48,7 @@
                   <% else %>
                 <td>-</td>
                 <% end %>
-                <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
+                <td><% cache("guild_logo_index_#{guild.name}", expires_in: 12.hours) do %><%= display_guild_logo(guild, 20) %><% end %> <%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
                 <% if guild.subscribers_count %>
                 <td><%= number_with_delimiter guild.subscribers_count %></td>
                 <% else %>
