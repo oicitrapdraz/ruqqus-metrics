@@ -14,7 +14,7 @@
     </div>
     <% end %>
   </div>
-  <div class='col-xl-8'>
+  <div class='col-xl-7'>
     <div class='card shadow-sm'>
       <div class='card-header'>
         <% if @guild.data %>
@@ -66,16 +66,15 @@
     </div>
     <br />
     <%== pagy_bootstrap_nav(@pagy) %>
-    <br />
   </div>
-  <div class='col-xl-2'>
+  <div class='col-xl-3'>
     <div class='card shadow-sm'>
       <div class='card-header'>
         <h3 class='title text-center'>Description</h3>
       </div>
       <div class='card-body' style='max-height: 300px; overflow: auto;'>
         <% if @guild.data %>
-        <%= @guild.data['description'] %>
+        <%= Kramdown::Document.new(@guild.data['description']).to_html.html_safe %>
         <% else %>
         <p class='text-center'>No data yet.</p>
         <% end %>

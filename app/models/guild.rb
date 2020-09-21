@@ -13,6 +13,7 @@ class Guild < ApplicationRecord
 
     scope = all
     scope = scope.where('name ILIKE ?', "%#{params[:name]}%") if params[:name]
+    scope = scope.where("data->>'description' ILIKE ?", "%#{params[:description]}%") if params[:description]
     scope = scope.where("data->>'is_banned' = ?", params[:is_banned]) if params[:is_banned]
     scope = scope.where("data->>'over_18' = ?", params[:over_18]) if params[:over_18]
     scope = scope.where("data->>'is_private' = ?", params[:is_private]) if params[:is_private]
