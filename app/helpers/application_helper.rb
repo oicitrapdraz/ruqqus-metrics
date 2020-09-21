@@ -18,4 +18,14 @@ module ApplicationHelper
       content_tag(:span, "-#{number_with_delimiter number}", class: 'badge badge-danger')
     end
   end
+
+  def display_guild_logo(guild)
+    if guild.data
+      profile_url = guild.data['profile_url'].start_with?('/assets/') ? 'logo.png' : guild.data['profile_url']
+
+      image_tag(profile_url, style: 'max-width: 50px; max-height: 50px; border-radius: 25px; border: 2px solid #73AD21;')
+    else
+      content_tag(:i, class: 'fas fa-users')
+    end
+  end
 end

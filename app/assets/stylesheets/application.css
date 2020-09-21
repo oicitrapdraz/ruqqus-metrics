@@ -28,3 +28,7 @@ h3.title.text-center {
   margin: auto;
   padding-bottom: 20px;
 }
+
+div.card-header {
+  overflow: auto;
+}

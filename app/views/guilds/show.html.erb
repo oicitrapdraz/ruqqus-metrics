@@ -17,7 +17,11 @@
   <div class='col-xl-8'>
     <div class='card shadow-sm'>
       <div class='card-header'>
+        <% if @guild.data %>
+        <h3 class='title text-center'><%= display_guild_logo(@guild) %> <%= link_to "+#{@guild.name}", "https://ruqqus.com/+#{@guild.name}", target: '_blank' %></h3>
+        <% else %>
         <h3 class='title text-center'><i class='fas fa-users'></i> <%= link_to "+#{@guild.name}", "https://ruqqus.com/+#{@guild.name}", target: '_blank' %></h3>
+        <% end %>
       </div>
       <div class='card-body'>
         <div class='d-none d-lg-block'>
@@ -25,6 +29,7 @@
         </div>
         <br />
         <div class='table-responsive'>
+          <% if @guild_histories.size.positive? %>
           <table class='table table-borderless'>
             <thead>
               <tr>
@@ -53,11 +58,27 @@
               <% end %>
             </tbody>
           </table>
+          <% else %>
+          <p class='text-center'>No data yet.</p>
+          <% end %>
         </div>
       </div>
     </div>
     <br />
     <%== pagy_bootstrap_nav(@pagy) %>
     <br />
+  </div>
+  <div class='col-xl-2'>
+    <div class='card shadow-sm'>
+      <div class='card-header'>
+        <h3 class='title text-center'>Description</h3>
+      </div>
+      <div class='card-body' style='max-height: 300px; overflow: auto;'>
+        <% if @guild.data %>
+        <%= @guild.data['description'] %>
+        <% else %>
+        <p class='text-center'>No data yet.</p>
+        <% end %>
+      </div>
   </div>
 </div>
