@@ -29,6 +29,6 @@ h3.title.text-center {
   padding-bottom: 20px;
 }
 
-div.card-header {
+.card-header {
   overflow: auto;
 }
