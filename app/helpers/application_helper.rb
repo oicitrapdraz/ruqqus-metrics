@@ -27,5 +27,7 @@ module ApplicationHelper
     else
       image_tag('logo.png', style: "max-width: #{max_size}px; max-height: #{max_size}px; border-radius: #{max_size / 2}px; border: 2px solid #73AD21;")
     end
+
+    content_tag(:i, '', class: 'fa fa-users')
   end
 end
