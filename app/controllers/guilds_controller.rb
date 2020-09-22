@@ -87,7 +87,7 @@ class GuildsController < ApplicationController
   end
 
   def index_params
-    params.permit(:name, :is_banned, :over_18, :is_private, :is_restricted, :page)
+    params.permit(:name, :description, :is_banned, :over_18, :is_private, :is_restricted, :page)
   end
 
   def search_params
