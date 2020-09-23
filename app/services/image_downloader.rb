@@ -20,10 +20,10 @@ class ImageDownloader
 
     return if profile_url.nil?
 
-    logo_path = File.join(Dir.pwd, 'app', 'assets', 'images', 'guild_logos', guild.id.to_s)
+    logo_path = File.join(Dir.pwd, 'public', 'guild_logos', guild.id.to_s)
 
     IO.copy_stream(open(profile_url), logo_path)
-    guild.update(logo_path: File.join('guild_logos', guild.id.to_s))
+    guild.update(logo_path: File.join('/', 'guild_logos', guild.id.to_s))
   rescue StandardError => e
     Logg.error(e)
   end

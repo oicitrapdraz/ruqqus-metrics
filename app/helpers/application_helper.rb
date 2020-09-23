@@ -23,7 +23,7 @@ module ApplicationHelper
     if guild.logo_path
       image_tag(guild.logo_path, style: "max-width: #{max_size}px; max-height: #{max_size}px; border-radius: #{max_size / 2}px; border: 2px solid #73AD21;")
     else
-      image_tag('guild_logos/0', style: "max-width: #{max_size}px; max-height: #{max_size}px; border-radius: #{max_size / 2}px; border: 2px solid #73AD21;")
+      image_tag('/guild_logos/0', style: "max-width: #{max_size}px; max-height: #{max_size}px; border-radius: #{max_size / 2}px; border: 2px solid #73AD21;")
     end
   end
 end
