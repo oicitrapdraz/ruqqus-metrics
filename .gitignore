@@ -4,6 +4,10 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# Ingore guild logos in public folder
+/public/guild_logos/*
+!/public/guild_logos/.keep
+
 # Ignore bundler config.
 /.bundle
 
