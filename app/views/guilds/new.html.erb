@@ -16,8 +16,8 @@
           <h3 class='title text-center'>Add a Missing Guild</h3>
         </div>
         <div class='card-body text-center'>
-          <p>The entry of new Guilds is done by a web scraper which runs automatically and periodically. However this scraper doesn't detect NSFW Guilds, also Guilds that are banned very quickly may not be entered either. For these and other scenarios that may exist I have created this form.</p>
-          <p>Behind the scenes, when you submit the name of a Guild that doesn't match any record in my database, I'll call Ruqqus' API and if I get a correct response I'll insert it, but keep in mind that it will not appear in the rankings immediately, it will take a few hours.</p>
+          <p>In some edge cases the entry of Guilds may fail, for those cases you can use this form and enter a Guild manually.</p>
+          <p>If you entered a Guild called xyz and you want to see if it was actually inserted in the database, visit <a href='https://ruqqus-metrics.com/guilds/xyz'>ruqqus-metrics.com/guilds/xyz</a>, if you don't see any error it means it was added to the database and we will start importing its statistics eventually.</p>
           <div class='col-xl-6 offset-xl-3'>
             <%= form_with url: guilds_path, method: :post, local: true do |form| %>
             <div class='form-group'>

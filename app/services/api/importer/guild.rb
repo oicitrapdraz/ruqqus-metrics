@@ -48,7 +48,7 @@ module API
       def update_logo(new_profile_url)
         previous_profile_url = guild.data&.[]('profile_url')
 
-        ImageDownloader.new(guild).call if (new_profile_url != previous_profile_url) || guild.logo_path.nil?
+        ImageDownloader.new(guild).call if !(new_profile_url.eql? previous_profile_url) || guild.logo_path.nil?
       end
     end
   end

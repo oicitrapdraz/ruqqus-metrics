@@ -9,16 +9,16 @@
           <table class='table table-borderless'>
             <thead>
               <tr>
-                <th scope='col' style='width: 35%;'>Ranking</th>
-                <th scope='col' style='width: 35%;'>Name</th>
-                <th scope='col' style='width: 10%;'>Growth</th>
+                <th scope='col' style='width: 15%;'>Ranking</th>
+                <th scope='col' style='width: 65%;'>Name</th>
+                <th scope='col' style='width: 20%;'>Growth</th>
               </tr>
             </thead>
             <tbody>
               <% @top_15_week_growth_guilds.each_with_index do |guild, index| %>
               <tr>
                 <th scope='row'>#<%= index + 1 %></th>
-                <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
+                <td><%= display_guild_logo(guild, 20) %> <%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
                 <td><%= display_number(guild.week_growth) %></td>
               </tr>
               <% end %>
@@ -38,16 +38,16 @@
           <table class='table table-borderless'>
             <thead>
               <tr>
-                <th scope='col' style='width: 35%;'>Ranking</th>
-                <th scope='col' style='width: 35%;'>Name</th>
-                <th scope='col' style='width: 10%;'>Growth</th>
+                <th scope='col' style='width: 15%;'>Ranking</th>
+                <th scope='col' style='width: 65%;'>Name</th>
+                <th scope='col' style='width: 20%;'>Growth</th>
               </tr>
             </thead>
             <tbody>
               <% @top_15_month_growth_guilds.each_with_index do |guild, index| %>
               <tr>
                 <th>#<%= index + 1 %></th>
-                <td><%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
+                <td><%= display_guild_logo(guild, 20) %> <%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
                 <td><%= display_number(guild.month_growth) %></td>
               </tr>
               <% end %>
