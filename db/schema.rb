@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_23_022244) do
+ActiveRecord::Schema.define(version: 2020_09_23_005849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2020_08_23_022244) do
     t.integer "rank"
     t.integer "week_growth"
     t.integer "month_growth"
+    t.string "logo_path"
     t.index "((data -> 'created_utc'::text))", name: "index_guilds_on_created_utc"
     t.index "((data -> 'is_banned'::text))", name: "index_guilds_on_is_banned"
     t.index "((data -> 'is_private'::text))", name: "index_guilds_on_is_private"

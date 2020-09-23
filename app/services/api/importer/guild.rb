@@ -29,6 +29,7 @@ module API
         subscribers_count = response['subscriber_count']
 
         ActiveRecord::Base.transaction do
+          update_logo(response['profile_url'])
           guild.update!(name: name, mods_count: mods_count, subscribers_count: subscribers_count, data: response)
 
           ids = ::Guild.where.not(data: nil).subscribers_count_order.ids
@@ -42,6 +43,12 @@ module API
       rescue StandardError => e
         Logg.error(e)
         Logg.info("Requested Guild was Guild with ID #{guild.id} and name #{guild.name}")
+      end
+
+      def update_logo(new_profile_url)
+        previous_profile_url = guild.data&.[]('profile_url')
+
+        ImageDownloader.new(guild).call if (new_profile_url != previous_profile_url) || guild.logo_path.nil?
       end
     end
   end

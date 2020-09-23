@@ -20,14 +20,10 @@ module ApplicationHelper
   end
 
   def display_guild_logo(guild, max_size)
-    if guild.data && guild.data['profile_url']
-      profile_url = guild.data['profile_url'].start_with?('/assets/') ? 'logo.png' : guild.data['profile_url']
-
-      image_tag(profile_url, style: "max-width: #{max_size}px; max-height: #{max_size}px; border-radius: #{max_size / 2}px; border: 2px solid #73AD21;")
+    if guild.logo_path
+      image_tag(guild.logo_path, style: "max-width: #{max_size}px; max-height: #{max_size}px; border-radius: #{max_size / 2}px; border: 2px solid #73AD21;")
     else
-      image_tag('logo.png', style: "max-width: #{max_size}px; max-height: #{max_size}px; border-radius: #{max_size / 2}px; border: 2px solid #73AD21;")
+      image_tag('guild_logos/0', style: "max-width: #{max_size}px; max-height: #{max_size}px; border-radius: #{max_size / 2}px; border: 2px solid #73AD21;")
     end
-
-    content_tag(:i, '', class: 'fa fa-users')
   end
 end
