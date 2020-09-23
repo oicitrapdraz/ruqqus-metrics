@@ -74,7 +74,7 @@
       </div>
       <div class='card-body' style='max-height: 300px; overflow: auto;'>
         <% if @guild.data %>
-        <%= Kramdown::Document.new(@guild.data['description']).to_html.html_safe %>
+        <%= Kramdown::Document.new(@guild.data['description'].to_s).to_html.html_safe %>
         <% else %>
         <p class='text-center'>No data yet.</p>
         <% end %>
