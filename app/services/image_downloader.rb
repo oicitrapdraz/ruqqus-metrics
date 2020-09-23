@@ -18,7 +18,7 @@ class ImageDownloader
   def download_guild_logo
     profile_url = guild.data&.[]('profile_url')
 
-    return if profile_url.nil?
+    return if profile_url.nil? || !(profile_url.start_with? 'http')
 
     logo_path = File.join(Dir.pwd, 'public', 'guild_logos', guild.id.to_s)
 
