@@ -23,9 +23,9 @@ namespace :guilds do
     end
   end
 
-  desc "Scrape Guilds in Ruqqus"
-  task scrape: :environment do
-    Scraper::Guild.new.call
+  desc "Create new Guilds from Ruqqus"
+  task create: :environment do
+    API::Importer::Guilds.new.call
   end
 
   desc "Clean Guilds History"
