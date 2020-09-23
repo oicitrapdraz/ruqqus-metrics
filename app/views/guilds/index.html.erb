@@ -48,7 +48,7 @@
                   <% else %>
                 <td>-</td>
                 <% end %>
-                <td><% cache("guild_logo_index_#{guild.name}", expires_in: 12.hours) do %><%= display_guild_logo(guild, 20) %><% end %> <%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
+                <td><%= display_guild_logo(guild, 20) %> <%= link_to "+#{guild.name}", guild_path(guild.name) %></td>
                 <% if guild.subscribers_count %>
                 <td><%= number_with_delimiter guild.subscribers_count %></td>
                 <% else %>

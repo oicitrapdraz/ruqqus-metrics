@@ -18,7 +18,7 @@
     <div class='card shadow-sm'>
       <div class='card-header'>
         <% if @guild.data %>
-        <h3 class='title text-center'><% cache("guild_logo_show_#{@guild.name}", expires_in: 12.hours) do %><%= display_guild_logo(@guild, 50) %><% end %> <%= link_to "+#{@guild.name}", "https://ruqqus.com/+#{@guild.name}", target: '_blank' %></h3>
+        <h3 class='title text-center'><%= display_guild_logo(@guild, 50) %> <%= link_to "+#{@guild.name}", "https://ruqqus.com/+#{@guild.name}", target: '_blank' %></h3>
         <% else %>
         <h3 class='title text-center'><i class='fas fa-users'></i> <%= link_to "+#{@guild.name}", "https://ruqqus.com/+#{@guild.name}", target: '_blank' %></h3>
         <% end %>
