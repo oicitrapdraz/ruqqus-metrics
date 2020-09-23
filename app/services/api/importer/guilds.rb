@@ -3,6 +3,7 @@
 module API
   module Importer
     class Guilds
+      PAGE_HARD_CAP = 300
       RUQQUS_API_SCRAPING_GUILDS_URL = 'https://ruqqus.com/api/v1/guilds?sort=new'
 
       def call(minimun_scraped_pages: 3)
@@ -19,8 +20,8 @@ module API
 
             found_guild = ::Guild.find_by('LOWER(name) = LOWER(?)', guild_name)
 
-            if found_guild && (current_page >= minimun_scraped_pages) && (response['data'].last.eql? guild)
-              return Logg.info('Stopping scrapper since the last guild was found and the minimun quota of pages were scraped')
+            if (current_page >= PAGE_HARD_CAP) || (found_guild && (current_page >= minimun_scraped_pages) && (response['data'].last.eql? guild))
+              return Logg.info('Stopping scrapper since the last guild was found and the minimun quota of pages were scraped or we hitted the page hard cap')
             end
 
             ::Guild.create!(name: guild_name) unless found_guild
