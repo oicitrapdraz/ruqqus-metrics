@@ -1,3 +1,7 @@
+<% title @guild.name %>
+<% meta_tag :description, @guild.data['description'].to_s.gsub(/[^0-9a-z ]/i, ' ').gsub(/\s+/, ' ').capitalize %>
+<% meta_tag :keywords, ['ruqqus', 'metrics', 'stats', 'statistics', @guild.name].join(',') %>
+
 <div class='row'>
   <div class='col-xl-2 d-none d-lg-block' style='margin-bottom: 20px;'>
     <% if @daily_average_growth %>

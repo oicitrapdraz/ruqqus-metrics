@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RuqqusMetrics</title>
+    <title>
+    <%= if content_for?(:title) then yield(:title) + ' - ' end %>RuqqusMetrics
+    </title>>
+    <meta name='description' content='<%= yield_meta_tag(:description, 'Metrics and statistics for every Guild on Ruqqus. You can see what are Ruqqus top guilds, trending guilds and other Ruqqus stats.') %>' />
+    <meta name='keywords' content='<%= yield_meta_tag(:keywords, 'ruqqus,metrics,statistics,guilds') %>' />
+    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag asset_path('favicon.ico') %>
-
-    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
 
     <% if Rails.env.production? %>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73025506-3"></script>
