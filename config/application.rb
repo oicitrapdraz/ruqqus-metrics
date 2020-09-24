@@ -21,6 +21,8 @@ Bundler.require(*Rails.groups)
 
 module RuqqusMetrics
   class Application < Rails::Application
+    config.middleware.insert_before ActionDispatch::Static, Rack::Deflater
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 

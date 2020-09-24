@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_005849) do
+ActiveRecord::Schema.define(version: 2020_09_24_151908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -49,11 +49,14 @@ ActiveRecord::Schema.define(version: 2020_09_23_005849) do
     t.index "((data -> 'is_private'::text))", name: "index_guilds_on_is_private"
     t.index "((data -> 'is_restricted'::text))", name: "index_guilds_on_is_restricted"
     t.index "((data -> 'over_18'::text))", name: "index_guilds_on_over_18"
+    t.index "((data)::text) gin_trgm_ops", name: "index_guilds_on_data", using: :gin
     t.index ["created_at"], name: "index_guilds_on_created_at"
     t.index ["mods_count"], name: "index_guilds_on_mods_count"
+    t.index ["month_growth"], name: "index_guilds_on_month_growth"
     t.index ["name"], name: "index_guilds_on_name", opclass: :gin_trgm_ops, using: :gin
     t.index ["subscribers_count"], name: "index_guilds_on_subscribers_count"
     t.index ["updated_at"], name: "index_guilds_on_updated_at"
+    t.index ["week_growth"], name: "index_guilds_on_week_growth"
   end
 
   add_foreign_key "guild_histories", "guilds"
