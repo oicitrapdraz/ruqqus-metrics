@@ -14,11 +14,10 @@ class Guild < ApplicationRecord
     scope = all
     scope = scope.where('name ILIKE ?', "%#{params[:name]}%") if params[:name]
     scope = scope.where("data->>'description' ILIKE :description AND data::text ILIKE :description", description: "%#{params[:description]}%") if params[:description]
-    scope = scope.where("data->>'is_banned' = :is_banned AND data::text ILIKE :is_banned", is_banned: params[:is_banned]) if params[:is_banned]
-    scope = scope.where("data->>'over_18' = :over_18 AND data::text ILIKE :over_18", over_18: params[:over_18]) if params[:over_18]
-    scope = scope.where("data->>'is_private' = :is_private AND data::text ILIKE :is_private", is_private: params[:is_private]) if params[:is_private]
-    scope = scope.where("data->>'is_restricted' = :is_restricted AND data::text ILIKE :is_restricted", is_restricted: params[:is_restricted]) if params[:is_restricted]
-
+    scope = scope.where('data @> ?', "{ \"is_banned\": #{params[:is_banned]} }") if params[:is_banned]
+    scope = scope.where('data @> ?', "{ \"over_18\": #{params[:over_18]} }") if params[:over_18]
+    scope = scope.where('data @> ?', "{ \"is_private\": #{params[:is_private]} }") if params[:is_private]
+    scope = scope.where('data @> ?', "{ \"is_restricted\": #{params[:is_restricted]} }") if params[:is_restricted]
     scope
   }
 
