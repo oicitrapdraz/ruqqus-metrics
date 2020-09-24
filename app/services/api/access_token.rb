@@ -7,7 +7,7 @@ module API
     RUQQUS_API_REFRESH_TOKEN = 'https://ruqqus.com/oauth/grant?grant_type=refresh'
 
     def call
-      Rails.cache.fetch('access_token', expires_in: 30.minutes) do
+      Rails.cache.fetch('access_token', expires_in: CacheUtils::MAX_EXPIRATION_TIME) do
         body = {
           'client_id' => ENV['API_CLIENT_ID'],
           'client_secret' => ENV['API_CLIENT_SECRET'],

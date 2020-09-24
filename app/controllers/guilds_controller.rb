@@ -5,21 +5,21 @@ class GuildsController < ApplicationController
 
   # GET /guilds
   def index
-    @guild_index = Rails.cache.fetch('index_guild_indices', expires_in: 5.minutes) do
+    @guild_index = Rails.cache.fetch('index_guild_indices', expires_in: CacheUtils::MID_EXPIRATION_TIME) do
       Guild.select('id, ROW_NUMBER() OVER(ORDER BY subscribers_count DESC NULLS LAST, created_at DESC) as index').where.not(data: nil).subscribers_count_order.map { |result| [result.id, result.index] }.to_h
     end
 
     cache_key = CacheUtils.new.generate_cache_key(controller_path, action_name, index_params)
 
-    @pagy, @guilds = Rails.cache.fetch(cache_key, expires_in: 5.minutes) do
-      pagy(Guild.search(search_params).where.not(data: nil).subscribers_count_order, items: 10, size: [1, 0, 0, 1])
+    @pagy, @guilds = Rails.cache.fetch(cache_key, expires_in: CacheUtils::MID_EXPIRATION_TIME) do
+      pagy(Guild.search(search_params).where.not(data: nil).subscribers_count_order, items: 12, size: [1, 0, 0, 1])
     end
 
-    @created_guild_last_week = Rails.cache.fetch('index_date_statistics', expires_in: 15.minutes) do
+    @created_guild_last_week = Rails.cache.fetch('index_date_statistics', expires_in: CacheUtils::MAX_EXPIRATION_TIME) do
       Guild.where("to_timestamp((data->>'created_utc')::integer) > ?", 1.week.ago).count
     end
 
-    @status_statistics = Rails.cache.fetch('index_status_statistics', expires_in: 15.minutes) do
+    @status_statistics = Rails.cache.fetch('index_status_statistics', expires_in: CacheUtils::MAX_EXPIRATION_TIME) do
       {
         is_banned: Guild.where("data->>'is_banned' = ?", 'true').count,
         over_18: Guild.where("data->>'over_18' = ?", 'true').count,
@@ -31,7 +31,7 @@ class GuildsController < ApplicationController
 
   # GET /growth
   def growth
-    @top_15_week_growth_guilds, @top_15_month_growth_guilds = Rails.cache.fetch('guild_growth', expires_in: 5.minutes) do
+    @top_15_week_growth_guilds, @top_15_month_growth_guilds = Rails.cache.fetch('guild_growth', expires_in: CacheUtils::HIGH_EXPIRATION_TIME) do
       [Guild.where.not(week_growth: nil).order(week_growth: :desc).limit(15), Guild.where.not(month_growth: nil).order(month_growth: :desc).limit(15)]
     end
   end
@@ -42,7 +42,7 @@ class GuildsController < ApplicationController
 
     cache_key = CacheUtils.new.generate_cache_key(controller_path, action_name, show_params)
 
-    @pagy, @guild_histories = Rails.cache.fetch(cache_key, expires_in: 5.minutes) do
+    @pagy, @guild_histories = Rails.cache.fetch(cache_key, expires_in: CacheUtils::HIGH_EXPIRATION_TIME) do
       pagy(@guild.guild_histories.order(created_at: :desc), items: 5, size: [1, 0, 0, 1])
     end
 
@@ -55,7 +55,7 @@ class GuildsController < ApplicationController
       end
     end
 
-    @data_series = Rails.cache.fetch("chart_#{cache_key}", expires_in: 5.minutes) do
+    @data_series = Rails.cache.fetch("chart_#{cache_key}", expires_in: CacheUtils::HIGH_EXPIRATION_TIME) do
       [
         {
           name: 'Subscribers Count',
