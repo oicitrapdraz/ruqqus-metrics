@@ -43,7 +43,7 @@ class GuildsController < ApplicationController
     cache_key = CacheUtils.new.generate_cache_key(controller_path, action_name, show_params)
 
     @pagy, @guild_histories = Rails.cache.fetch(cache_key, expires_in: CacheUtils::HIGH_EXPIRATION_TIME) do
-      pagy(@guild.guild_histories.order(created_at: :desc), items: 5, size: [1, 0, 0, 1])
+      pagy(@guild.guild_histories.order(created_at: :desc), items: 6, size: [1, 0, 0, 1])
     end
 
     if @guild_histories.size > 1

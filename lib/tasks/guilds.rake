@@ -11,7 +11,7 @@ namespace :guilds do
                       .not("data->>'is_banned' = ?", 'true')
                       .or(Guild.where(data: nil))
                       .where('updated_at < ?', 12.hours.ago)
-                      .select('id, subscribers_count + EXTRACT(EPOCH FROM(current_timestamp - updated_at)) as points')
+                      .select('id, subscribers_count + EXTRACT(EPOCH FROM(CURRENT_TIMESTAMP - updated_at)) + CASE WHEN week_growth IS NULL THEN 0 ELSE week_growth END as points')
                       .order(points: :desc)
                       .limit(number_of_guilds_to_update)
                       .map(&:id)
