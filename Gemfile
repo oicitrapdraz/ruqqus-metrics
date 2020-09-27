@@ -5,7 +5,6 @@ ruby '2.6.6'
 
 gem 'chartkick', '~> 3.4'
 gem 'hiredis', '~> 0.6.3'
-gem 'kramdown', '~> 2.3'
 gem 'pagy', '~> 3.8', '>= 3.8.3'
 gem 'recaptcha', '~> 5.5'
 gem 'redis', '~> 4.2', '>= 4.2.1', require: ['redis', 'redis/connection/hiredis']
