@@ -22,13 +22,13 @@ class Guild < ApplicationRecord
   }
 
   def update_growth
-    month_histories = guild_histories.where('created_at > ? AND data @> ?', 1.month.ago, "{ \"is_banned\": false }").order(:created_at).to_a
+    month_histories = guild_histories.where('created_at > ? AND data @> ?', 1.month.ago, "{ \"is_private\": false }").order(:created_at).to_a
 
     return if month_histories.count < 2
 
     update(month_growth: month_histories.last.subscribers_count - month_histories.first.subscribers_count)
 
-    week_histories = guild_histories.where('created_at > ? AND data @> ?', 1.week.ago, "{ \"is_banned\": false }").order(:created_at).to_a
+    week_histories = guild_histories.where('created_at > ? AND data @> ?', 1.week.ago, "{ \"is_private\": false }").order(:created_at).to_a
 
     return if week_histories.count < 2
 
