@@ -151,6 +151,10 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    skylight (4.3.1)
+      skylight-core (= 4.3.1)
+    skylight-core (4.3.1)
+      activesupport (>= 4.2.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -204,6 +208,7 @@ DEPENDENCIES
   recaptcha (~> 5.5)
   redis (~> 4.2, >= 4.2.1)
   sass-rails (>= 6)
+  skylight (~> 4.3, >= 4.3.1)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

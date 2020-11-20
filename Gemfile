@@ -8,6 +8,7 @@ gem 'hiredis', '~> 0.6.3'
 gem 'pagy', '~> 3.8', '>= 3.8.3'
 gem 'recaptcha', '~> 5.5'
 gem 'redis', '~> 4.2', '>= 4.2.1', require: ['redis', 'redis/connection/hiredis']
+gem 'skylight', '~> 4.3', '>= 4.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
